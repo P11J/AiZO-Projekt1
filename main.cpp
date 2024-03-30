@@ -216,6 +216,10 @@ public:
 
 };
 */
+
+void analysis();
+
+
 int menu1(){
     cout << "Wybierz typ danych: \n";
     cout << "1 - int\n";
@@ -472,49 +476,7 @@ void menu2(int type){
                     break;
                 }
                 case 11:{
-                    cout << "Wybierz algorytm sortowania:\n";
-                    cout << "1 - Insertion Sort\n";
-                    cout << "2 - Heap Sort\n";
-                    cout << "3 - Shell Sort metoda Shella\n";
-                    cout << "4 - Shell Sort metoda Hibbarda\n";
-                    cout << "5 - Quick Sort ze skrajnym lewym pivotem\n";
-                    cout << "6 - Quick Sort ze skrajnym prawym pivotem\n";
-                    cout << "7 - Quick Sort ze srodkowym pivotem\n";
-                    cout << "8 - Quick Sort z losowym pivotem\n";
-                    int choiceAnalyse = 0;
-                    int minimumAnalyse = 0;
-                    int maximumAnalyse = 0;
-                    cin >> choiceAnalyse;
-                    cout << "Wybierz minimum dla generowanych tablic: \n";
-                    cin >> minimumAnalyse;
-                    cout << "Oraz maximum: \n";
-                    cin >> maximumAnalyse;
-
-                    switch(choiceAnalyse){
-                        case 1:{
-                            int arrayToAnalyseSize;
-                            int* arrayToAnalyse;
-                            int* arrayToAnalyseSorted;
-
-                            ofstream file("insertionSortAnaliza.txt");
-
-                            cout << "Aktualny rozmiar tablicy to: " << arrayToAnalyseSize <<endl;
-                            InsertionSortInt* insertionSortInt = new InsertionSortInt();
-                            arrayToAnalyseSorted = insertionSortInt -> generateRandArray(arrayToAnalyseSize, minimumAnalyse, maximumAnalyse);
-                            arrayToAnalyseSorted = insertionSortInt ->sortArray(arrayToAnalyse, arrayToAnalyseSize);
-
-                            if(file.is_open()){
-                                file << arrayToAnalyseSize << ";";
-                                file << insertionSortInt -> duration.count() << endl;
-                            }else{
-                                cerr << "Błąd: Nie można otworzyć pliku do zapisu." << endl;
-                            }
-                            break;
-                        }
-                        default:
-                            cout << "Blednie podano nr algorytmu!!!\n";
-                            break;
-                    }
+                    analysis();
 
                     break;
                 }
@@ -547,3 +509,74 @@ bool compare(int a, int b){
     return a > b;
 }
 
+void analysis(){
+    cout << "Wybierz algorytm sortowania:\n";
+    cout << "1 - Insertion Sort\n";
+    cout << "2 - Heap Sort\n";
+    cout << "3 - Shell Sort metoda Shella\n";
+    cout << "4 - Shell Sort metoda Hibbarda\n";
+    cout << "5 - Quick Sort ze skrajnym lewym pivotem\n";
+    cout << "6 - Quick Sort ze skrajnym prawym pivotem\n";
+    cout << "7 - Quick Sort ze srodkowym pivotem\n";
+    cout << "8 - Quick Sort z losowym pivotem\n";
+    int choiceAnalyse = 0;
+    int minimumAnalyse = 0;
+    int maximumAnalyse = 0;
+    cin >> choiceAnalyse;
+    cout << "Wybierz minimum dla generowanych tablic: \n";
+    cin >> minimumAnalyse;
+    cout << "Oraz maximum: \n";
+    cin >> maximumAnalyse;
+
+    switch(choiceAnalyse){
+        case 1:{
+            int arrayToAnalyseSize = 10000;
+            int* arrayToAnalyse;
+            int* arrayToAnalyseSorted;
+            string fileOutName = "E:\\1_studia\\AiZO\\Projekt1\\insertionSortRandAnaliza.txt";
+
+            ofstream fileOut(fileOutName);
+
+
+            InsertionSortInt* insertionSortInt = new InsertionSortInt();
+
+            double durationSum = 0;
+            const double durationCounter = 5.0;
+            double durationToAnalyse = 0;
+
+
+            //dla calkowicie losowej tablicy
+            for(int sizeMultiplier = 1; sizeMultiplier <= 64; sizeMultiplier *= 2){
+                arrayToAnalyseSize = 10000 * sizeMultiplier;
+                for(int i = 0; i < durationCounter; i++){
+                    arrayToAnalyse = insertionSortInt -> generateRandArray(arrayToAnalyseSize, minimumAnalyse, maximumAnalyse);
+                    arrayToAnalyseSorted = insertionSortInt -> sortArray(arrayToAnalyse, arrayToAnalyseSize);
+                    durationSum += insertionSortInt -> duration.count();
+                }
+                cout << "Aktualny rozmiar tablicy to: " << arrayToAnalyseSize << endl;
+                durationToAnalyse = durationSum / durationCounter;
+
+                if(fileOut.is_open()){
+                    fileOut << arrayToAnalyseSize << ";";
+                    fileOut << durationToAnalyse << endl;
+                }else{
+                    cerr << "Błąd: Nie można otworzyć pliku do zapisu." << endl;
+                }
+                delete[] arrayToAnalyse;
+                delete[] arrayToAnalyseSorted;
+
+                durationSum = 0;
+                durationToAnalyse = 0;
+            }
+
+
+
+            fileOut.close();
+            cout << "Zakonczono analize\n";
+            break;
+        }
+        default:
+            cout << "Blednie podano nr algorytmu!!!\n";
+            break;
+    }
+}
