@@ -6,4 +6,6 @@ set(CMAKE_CXX_STANDARD 20)
 
 
 add_executable(Projekt1 main.cpp
+        SortAlgInt.cpp
+        SortAlgInt.h
 )

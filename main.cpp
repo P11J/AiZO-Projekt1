@@ -2,228 +2,20 @@
 #include <string>
 #include <fstream>
 #include <cstring> // Do użycia funkcji std::strerror
-#include <algorithm>
-#include <cmath> //dla pow()
+#include <algorithm> // Do uzycia funkcji swap
 #include <chrono>
-
+#include "SortAlgInt.h"
 
 using namespace std;
+
+
+//DO POKAZANIA ZMIENIC DURATIONCOUNTER NA 50
+
+
+
+
+
 bool compare(int a, int b); //funkcja pozwalajaca na sortowanie tablicy malejaco
-
-class SortAlgInt{ //klasa bazowa dla klas potomnych dla poszczegolnych algorytmow sortowania
-
-public:
-    chrono::steady_clock::time_point startTime;
-    chrono::steady_clock::time_point endTime;
-    chrono::milliseconds duration;
-
-
-    static int* generateRandArray(int arraySize, int minimum, int maximum){
-        if(arraySize < 1 or minimum > maximum){
-            throw invalid_argument("Podano bledny/e argument/y!!!\n");
-        }
-
-        srand(time(nullptr));
-
-        int* array = new int[arraySize];
-
-        for(int i = 0; i < arraySize; i++){
-            array[i] = rand() % (maximum - minimum + 1) + minimum;
-        }
-        return array;
-    }
-
-    static void printArray(int* array, int arraySize){
-        for(int i = 0; i < arraySize; i++){
-            cout << array[i] << " ";
-        }
-        cout<<endl<<endl;
-    }
-};
-
-class InsertionSortInt : public SortAlgInt{
-public:
-
-    int* sortArray(int* array, int arraySize){
-        int* arrayToSort = new int[arraySize];
-        for(int i = 0; i < arraySize; i++){
-            arrayToSort[i] = array[i];
-        }
-
-        this -> startTime = chrono::steady_clock::now();
-        int key;
-        for(int i = 1; i < arraySize; i++){
-            key=arrayToSort[i];
-            int j=i;
-            while(j > 0 and arrayToSort[j-1] > key){
-                arrayToSort[j] = arrayToSort[j-1];
-                j--;
-            }
-            arrayToSort[j] = key;
-        }
-        this -> endTime = chrono::steady_clock::now();
-        this -> duration = chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime);
-        return arrayToSort;
-    }
-};
-
-class HeapSortInt : public SortAlgInt{
-private:
-    static void heap_fix_down(int* array, int i, int arraySize) {
-        int j, temp;
-        temp = array[i];
-        j = 2 * i + 1; // j to lewy potomek i
-
-        while (j < arraySize) {
-            if (j + 1 < arraySize && array[j] < array[j + 1]) // Sprawdza, czy prawy potomek istnieje i jest większy od lewego
-                j = j + 1; // Przechodzi do prawego potomka, jeśli spełnia warunki
-
-            if (temp >= array[j]) // Jeśli żaden z potomków nie jest większy, przerwij
-                break;
-
-            array[(j - 1) / 2] = array[j]; // Przenosi większego potomka do węzła rodzica
-            j = 2 * j + 1; // Przechodzi do lewego potomka obecnego potomka
-        }
-
-        array[(j - 1) / 2] = temp; // Wstawia wartość temp (początkowa wartość array[i]) na odpowiednie miejsce w kopcu
-    }
-
-    static void heap_create_dn(int* array, int arraySize) {
-        for(int i = (arraySize - 2) / 2; i >= 0; --i) // Rozpocznij od ostatniego węzła, który ma potomków
-            heap_fix_down(array, i, arraySize);
-    }
-
-public:
-    int* sortArray(int* array, int arraySize){
-        int* arrayToSort = new int[arraySize];
-        for(int i = 0; i < arraySize; i++){
-            arrayToSort[i] = array[i];
-        }
-        this -> startTime = chrono::steady_clock::now();
-        heap_create_dn(arrayToSort, arraySize);
-        for(int i = arraySize - 1; i > 0; i--) {
-            swap(arrayToSort[0],arrayToSort[i]); //zamiana
-            heap_fix_down(arrayToSort,0,i); //naprawa
-        }
-        this -> endTime = chrono::steady_clock::now();
-        this -> duration = chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime);
-        return arrayToSort;
-    }
-};
-
-class ShellSortInt : public SortAlgInt{
-public:
-    int* sortShell(int* array, int arraySize){
-        int* arrayToSort = new int[arraySize];
-        for(int i = 0; i < arraySize; i++){
-            arrayToSort[i] = array[i];
-        }
-
-        this -> startTime = chrono::steady_clock::now();
-        for (int gap = arraySize / 2; gap > 0; gap /= 2) {
-            for (int i = gap; i < arraySize; i += 1) {
-                int temp = arrayToSort[i];
-                int j;
-                for (j = i; j >= gap and arrayToSort[j - gap] > temp; j -= gap) {
-                    arrayToSort[j] = arrayToSort[j - gap];
-                }
-                arrayToSort[j] = temp;
-            }
-        }
-        this -> endTime = chrono::steady_clock::now();
-        this -> duration = chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime);
-
-        return arrayToSort;
-    }
-
-    int* sortHibbard(int* array, int arraySize) {
-        int* arrayToSort = new int[arraySize];
-        for(int i = 0; i < arraySize; i++){
-            arrayToSort[i] = array[i];
-        }
-
-        this -> startTime = chrono::steady_clock::now();
-        // Obliczanie maksymalnego k, dla którego 2^k - 1 < arraySize
-        int k = 1;
-        while ((pow(2, k) - 1) < arraySize) {
-            ++k;
-        }
-        --k; // Znalezienie największego odstępu mniejszego niż arraySize
-
-        // Pętla po odstępach Hibbarda 2^k - 1, zaczynając od największego
-        while (k > 0) {
-            int gap = pow(2, k) - 1; // Odstęp dla danej iteracji
-
-            // Sortowanie przez wstawianie dla danego odstępu
-            for (int i = gap; i < arraySize; i++) {
-                int temp = arrayToSort[i];
-                int j;
-                for (j = i; j >= gap and arrayToSort[j - gap] > temp; j -= gap) {
-                    arrayToSort[j] = arrayToSort[j - gap];
-                }
-                arrayToSort[j] = temp;
-            }
-
-            --k; // Zmniejszenie k na końcu pętli while
-        }
-        this -> endTime = chrono::steady_clock::now();
-        this -> duration = chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime);
-
-        return arrayToSort;
-    }
-};
-
-class QuickSortInt : public SortAlgInt{//poprawic (dla skrajnego lewego odnosimy sie do indexu -1)
-private:
-    void quickSort(int *array, int left, int right, int pivot_index)
-    {
-        if(right <= left) return;
-
-        int i = left - 1, j = right + 1,
-        pivot = array[pivot_index]; //wybieramy punkt odniesienia
-
-        while(true)
-        {
-            //szukam elementu wiekszego lub rownego pivot stojacego
-            //po prawej stronie wartosci pivot
-            while(pivot > array[++i]);
-
-            //szukam elementu mniejszego lub rownego pivot stojacego
-            //po lewej stronie wartosci pivot
-            while(pivot < array[--j]);
-
-            //jesli liczniki sie nie minely to zamień elementy ze soba
-            //stojace po niewlasciwej stronie elementu pivot
-            if( i <= j)
-                //funkcja swap zamienia wartosciami array[i] z array[j]
-                swap(array[i], array[j]);
-            else
-                break;
-        }
-
-        if(j > left)
-            quickSort(array, left, j, pivot_index);
-        if(i < right)
-            quickSort(array, i, right, pivot_index);
-    }
-
-public:
-    int* sort(int* array, int arraySize, int pivot_index) {
-        int* arraySorted = new int[arraySize];
-        for(int i = 0; i < arraySize; i++){
-            arraySorted[i] = array[i];
-        }
-
-        this -> startTime = chrono::steady_clock::now();
-        quickSort(arraySorted,0,arraySize - 1,pivot_index);
-        this -> endTime = chrono::steady_clock::now();
-        this -> duration = chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime);
-
-        return arraySorted;
-    }
-
-};
-
 
 void analysis(); //naglowek dla funkcji przeprowadzajacej analize danego algorytmu
 
@@ -409,24 +201,32 @@ void menu2(int type){ //menu 2. poziomu, zależne od wybranego typu danych
                             InsertionSortInt* insertionSortInt = new InsertionSortInt();
                             arraySorted = insertionSortInt -> sortArray(array, arraySize);
                             cout << insertionSortInt -> duration << endl;
+                            if(insertionSortInt -> isSorted(arraySorted,arraySize))
+                                cout << "Tablica zostala posortowana prawidlowo.\n";
                             break;
                         }
                         case 2:{
                             HeapSortInt* heapSortInt = new HeapSortInt();
                             arraySorted = heapSortInt ->sortArray(array, arraySize);
                             cout << heapSortInt -> duration << endl;
+                            if(heapSortInt -> isSorted(arraySorted,arraySize))
+                                cout << "Tablica zostala posortowana prawidlowo.\n";
                             break;
                         }
                         case 3:{
                             ShellSortInt* shellSortInt = new ShellSortInt();
                             arraySorted = shellSortInt ->sortShell(array, arraySize);
                             cout << shellSortInt -> duration << endl;
+                            if(shellSortInt -> isSorted(arraySorted,arraySize))
+                                cout << "Tablica zostala posortowana prawidlowo.\n";
                             break;
                         }
                         case 4:{
                             ShellSortInt* shellSortInt = new ShellSortInt();
                             arraySorted = shellSortInt ->sortHibbard(array, arraySize);
                             cout << shellSortInt -> duration << endl;
+                            if(shellSortInt -> isSorted(arraySorted,arraySize))
+                                cout << "Tablica zostala posortowana prawidlowo.\n";
                             break;
                         }
 
@@ -434,18 +234,24 @@ void menu2(int type){ //menu 2. poziomu, zależne od wybranego typu danych
                             QuickSortInt* quickSortInt = new QuickSortInt();
                             arraySorted = quickSortInt -> sort(array, arraySize, 0); //lewy pivot
                             cout << quickSortInt -> duration << endl;
+                            if(quickSortInt -> isSorted(arraySorted,arraySize))
+                                cout << "Tablica zostala posortowana prawidlowo.\n";
                             break;
                         }
                         case 6:{
                             QuickSortInt* quickSortInt = new QuickSortInt();
                             arraySorted = quickSortInt -> sort(array, arraySize, arraySize - 1); //prawy pivot
                             cout << quickSortInt -> duration << endl;
+                            if(quickSortInt -> isSorted(arraySorted,arraySize))
+                                cout << "Tablica zostala posortowana prawidlowo.\n";
                             break;
                         }
                         case 7:{
                             QuickSortInt* quickSortInt = new QuickSortInt();
                             arraySorted = quickSortInt -> sort(array, arraySize, arraySize / 2); //srodkowy pivot
                             cout << quickSortInt -> duration << endl;
+                            if(quickSortInt -> isSorted(arraySorted,arraySize))
+                                cout << "Tablica zostala posortowana prawidlowo.\n";
                             break;
                         }
                         case 8: {
@@ -453,6 +259,8 @@ void menu2(int type){ //menu 2. poziomu, zależne od wybranego typu danych
                             QuickSortInt* quickSortInt = new QuickSortInt();
                             arraySorted = quickSortInt->sort(array, arraySize, rand() % arraySize); //losowy pivot
                             cout << quickSortInt -> duration << endl;
+                            if(quickSortInt -> isSorted(arraySorted,arraySize))
+                                cout << "Tablica zostala posortowana prawidlowo.\n";
                             break;
                         }
                         default:{
@@ -483,7 +291,7 @@ void menu2(int type){ //menu 2. poziomu, zależne od wybranego typu danych
                     break;
                 }
                 case 11:{
-                    //zakres losowanych licz 1 - 30000
+                    //zakres losowanych liczb 1 - 30000
                     analysis();
 
                     break;
@@ -543,7 +351,7 @@ void analysis(){
             int arrayToAnalyseSize;
             int* arrayToAnalyse;
             int* arrayToAnalyseSorted;
-            string fileOutName = "E:\\1_studia\\AiZO\\Projekt1\\insertionSortRandAnaliza.txt";
+            string fileOutName = "E:\\1_studia\\AiZO\\Projekt1\\insertionSortAnaliza.txt";
 
             ofstream fileOut(fileOutName);
 
@@ -556,13 +364,12 @@ void analysis(){
 
 
             //dla calkowicie losowej tablicy
-            /*
             for(int sizeMultiplier = 1; sizeMultiplier <= 64; sizeMultiplier *= 2){
                 arrayToAnalyseSize = 10000 * sizeMultiplier;
                 for(int i = 0; i < durationCounter; i++){
-                    arrayToAnalyse = heapSortInt -> generateRandArray(arrayToAnalyseSize, minimumAnalyse, maximumAnalyse);
-                    arrayToAnalyseSorted = heapSortInt -> sortArray(arrayToAnalyse, arrayToAnalyseSize);
-                    durationSum += heapSortInt -> duration.count();
+                    arrayToAnalyse = insertionSortInt -> generateRandArray(arrayToAnalyseSize, minimumAnalyse, maximumAnalyse);
+                    arrayToAnalyseSorted = insertionSortInt -> sortArray(arrayToAnalyse, arrayToAnalyseSize);
+                    durationSum += insertionSortInt -> duration.count();
                 }
                 cout << "Aktualny rozmiar tablicy to: " << arrayToAnalyseSize << endl;
                 durationToAnalyse = durationSum / durationCounter;
@@ -577,9 +384,8 @@ void analysis(){
                 delete[] arrayToAnalyseSorted;
 
                 durationSum = 0;
-                durationToAnalyse = 0;
             }
-            */
+
 
             //dla tablicy pos. rosnaco
 
@@ -605,7 +411,6 @@ void analysis(){
 
                 durationSum = 0;
             }
-
             //dla tablicy pos. malejo
             for(int sizeMultiplier = 1; sizeMultiplier <= 64; sizeMultiplier *= 2){
                 arrayToAnalyseSize = 10000 * sizeMultiplier;
@@ -841,7 +646,7 @@ void analysis(){
 
             //dla calkowicie losowej tablicy
             for(int sizeMultiplier = 1; sizeMultiplier <= 64; sizeMultiplier *= 2){
-                arrayToAnalyseSize = 80000 * sizeMultiplier;
+                arrayToAnalyseSize = 320000 * sizeMultiplier;
                 for(int i = 0; i < durationCounter; i++){
                     arrayToAnalyse = shellSortInt -> generateRandArray(arrayToAnalyseSize, minimumAnalyse, maximumAnalyse);
                     arrayToAnalyseSorted = shellSortInt -> sortShell(arrayToAnalyse, arrayToAnalyseSize);
@@ -864,7 +669,7 @@ void analysis(){
 
             //dla tablicy pos. rosnaco
             for(int sizeMultiplier = 1; sizeMultiplier <= 64; sizeMultiplier *= 2){
-                arrayToAnalyseSize = 80000 * sizeMultiplier;
+                arrayToAnalyseSize = 320000 * sizeMultiplier;
                 for(int i = 0; i < durationCounter; i++){
                     arrayToAnalyse = shellSortInt -> generateRandArray(arrayToAnalyseSize, minimumAnalyse, maximumAnalyse);
                     sort(arrayToAnalyse, arrayToAnalyse + arrayToAnalyseSize);
@@ -888,7 +693,7 @@ void analysis(){
 
             //dla tablicy pos. malejo
             for(int sizeMultiplier = 1; sizeMultiplier <= 64; sizeMultiplier *= 2){
-                arrayToAnalyseSize = 80000 * sizeMultiplier;
+                arrayToAnalyseSize = 320000 * sizeMultiplier;
                 for(int i = 0; i < durationCounter; i++){
                     arrayToAnalyse = shellSortInt -> generateRandArray(arrayToAnalyseSize, minimumAnalyse, maximumAnalyse);
                     sort(arrayToAnalyse,arrayToAnalyse + arrayToAnalyseSize, compare);
@@ -912,7 +717,7 @@ void analysis(){
 
             //dla tablicy pos. w 33%
             for(int sizeMultiplier = 1; sizeMultiplier <= 64; sizeMultiplier *= 2){
-                arrayToAnalyseSize = 80000 * sizeMultiplier;
+                arrayToAnalyseSize = 320000 * sizeMultiplier;
                 for(int i = 0; i < durationCounter; i++){
                     arrayToAnalyse = shellSortInt -> generateRandArray(arrayToAnalyseSize, minimumAnalyse, maximumAnalyse);
                     sort(arrayToAnalyse, arrayToAnalyse + arrayToAnalyseSize / 3);
@@ -936,7 +741,7 @@ void analysis(){
 
             //dla tablicy pos. w 66%
             for(int sizeMultiplier = 1; sizeMultiplier <= 64; sizeMultiplier *= 2){
-                arrayToAnalyseSize = 80000 * sizeMultiplier;
+                arrayToAnalyseSize = 320000 * sizeMultiplier;
                 for(int i = 0; i < durationCounter; i++){
                     arrayToAnalyse = shellSortInt -> generateRandArray(arrayToAnalyseSize, minimumAnalyse, maximumAnalyse);
                     sort(arrayToAnalyse, arrayToAnalyse + (arrayToAnalyseSize / 3) * 2);
@@ -1103,9 +908,8 @@ void analysis(){
             cout << "Zakonczono analize\n";
             break;
         }
-        /* ZROBIC QUICKSORTA!!!!
         case 5:{
-            int arrayToAnalyseSize = 10000;
+            int arrayToAnalyseSize;
             int* arrayToAnalyse;
             int* arrayToAnalyseSorted;
             string fileOutName = "E:\\1_studia\\AiZO\\Projekt1\\leftQuickSortAnaliza.txt";
@@ -1113,7 +917,7 @@ void analysis(){
             ofstream fileOut(fileOutName);
 
 
-            ShellSortInt* shellSortInt = new ShellSortInt();
+            QuickSortInt* quickSortInt = new QuickSortInt();
 
             double durationSum = 0;
             const double durationCounter = 5.0;
@@ -1122,11 +926,11 @@ void analysis(){
 
             //dla calkowicie losowej tablicy
             for(int sizeMultiplier = 1; sizeMultiplier <= 64; sizeMultiplier *= 2){
-                arrayToAnalyseSize = 10000 * sizeMultiplier;
+                arrayToAnalyseSize = 40000 * sizeMultiplier;
                 for(int i = 0; i < durationCounter; i++){
-                    arrayToAnalyse = shellSortInt -> generateRandArray(arrayToAnalyseSize, minimumAnalyse, maximumAnalyse);
-                    arrayToAnalyseSorted = shellSortInt -> sortHibbard(arrayToAnalyse, arrayToAnalyseSize);
-                    durationSum += shellSortInt -> duration.count();
+                    arrayToAnalyse = quickSortInt -> generateRandArray(arrayToAnalyseSize, minimumAnalyse, maximumAnalyse);
+                    arrayToAnalyseSorted = quickSortInt -> sort(arrayToAnalyse, arrayToAnalyseSize,0);
+                    durationSum += quickSortInt -> duration.count();
                 }
                 cout << "Aktualny rozmiar tablicy to: " << arrayToAnalyseSize << endl;
                 durationToAnalyse = durationSum / durationCounter;
@@ -1146,12 +950,12 @@ void analysis(){
 
             //dla tablicy pos. rosnaco
             for(int sizeMultiplier = 1; sizeMultiplier <= 64; sizeMultiplier *= 2){
-                arrayToAnalyseSize = 10000 * sizeMultiplier;
+                arrayToAnalyseSize = 40000 * sizeMultiplier;
                 for(int i = 0; i < durationCounter; i++){
-                    arrayToAnalyse = shellSortInt -> generateRandArray(arrayToAnalyseSize, minimumAnalyse, maximumAnalyse);
+                    arrayToAnalyse = quickSortInt -> generateRandArray(arrayToAnalyseSize, minimumAnalyse, maximumAnalyse);
                     sort(arrayToAnalyse, arrayToAnalyse + arrayToAnalyseSize);
-                    arrayToAnalyseSorted = shellSortInt -> sortHibbard(arrayToAnalyse, arrayToAnalyseSize);
-                    durationSum += shellSortInt -> duration.count();
+                    arrayToAnalyseSorted = quickSortInt -> sort(arrayToAnalyse, arrayToAnalyseSize,0);
+                    durationSum += quickSortInt -> duration.count();
                 }
                 cout << "Aktualny rozmiar tablicy to: " << arrayToAnalyseSize << endl;
                 durationToAnalyse = durationSum / durationCounter;
@@ -1171,12 +975,12 @@ void analysis(){
 
             //dla tablicy pos. malejo
             for(int sizeMultiplier = 1; sizeMultiplier <= 64; sizeMultiplier *= 2){
-                arrayToAnalyseSize = 10000 * sizeMultiplier;
+                arrayToAnalyseSize = 40000 * sizeMultiplier;
                 for(int i = 0; i < durationCounter; i++){
-                    arrayToAnalyse = shellSortInt -> generateRandArray(arrayToAnalyseSize, minimumAnalyse, maximumAnalyse);
+                    arrayToAnalyse = quickSortInt -> generateRandArray(arrayToAnalyseSize, minimumAnalyse, maximumAnalyse);
                     sort(arrayToAnalyse,arrayToAnalyse + arrayToAnalyseSize, compare);
-                    arrayToAnalyseSorted = shellSortInt -> sortHibbard(arrayToAnalyse, arrayToAnalyseSize);
-                    durationSum += shellSortInt -> duration.count();
+                    arrayToAnalyseSorted = quickSortInt -> sort(arrayToAnalyse, arrayToAnalyseSize,0);
+                    durationSum += quickSortInt -> duration.count();
                 }
                 cout << "Aktualny rozmiar tablicy to: " << arrayToAnalyseSize << endl;
                 durationToAnalyse = durationSum / durationCounter;
@@ -1196,12 +1000,12 @@ void analysis(){
 
             //dla tablicy pos. w 33%
             for(int sizeMultiplier = 1; sizeMultiplier <= 64; sizeMultiplier *= 2){
-                arrayToAnalyseSize = 10000 * sizeMultiplier;
+                arrayToAnalyseSize = 40000 * sizeMultiplier;
                 for(int i = 0; i < durationCounter; i++){
-                    arrayToAnalyse = shellSortInt -> generateRandArray(arrayToAnalyseSize, minimumAnalyse, maximumAnalyse);
+                    arrayToAnalyse = quickSortInt -> generateRandArray(arrayToAnalyseSize, minimumAnalyse, maximumAnalyse);
                     sort(arrayToAnalyse, arrayToAnalyse + arrayToAnalyseSize / 3);
-                    arrayToAnalyseSorted = shellSortInt -> sortHibbard(arrayToAnalyse, arrayToAnalyseSize);
-                    durationSum += shellSortInt -> duration.count();
+                    arrayToAnalyseSorted = quickSortInt -> sort(arrayToAnalyse, arrayToAnalyseSize,0);
+                    durationSum += quickSortInt -> duration.count();
                 }
                 cout << "Aktualny rozmiar tablicy to: " << arrayToAnalyseSize << endl;
                 durationToAnalyse = durationSum / durationCounter;
@@ -1221,12 +1025,12 @@ void analysis(){
 
             //dla tablicy pos. w 66%
             for(int sizeMultiplier = 1; sizeMultiplier <= 64; sizeMultiplier *= 2){
-                arrayToAnalyseSize = 10000 * sizeMultiplier;
+                arrayToAnalyseSize = 40000 * sizeMultiplier;
                 for(int i = 0; i < durationCounter; i++){
-                    arrayToAnalyse = shellSortInt -> generateRandArray(arrayToAnalyseSize, minimumAnalyse, maximumAnalyse);
+                    arrayToAnalyse = quickSortInt -> generateRandArray(arrayToAnalyseSize, minimumAnalyse, maximumAnalyse);
                     sort(arrayToAnalyse, arrayToAnalyse + (arrayToAnalyseSize / 3) * 2);
-                    arrayToAnalyseSorted = shellSortInt -> sortHibbard(arrayToAnalyse, arrayToAnalyseSize);
-                    durationSum += shellSortInt -> duration.count();
+                    arrayToAnalyseSorted = quickSortInt -> sort(arrayToAnalyse, arrayToAnalyseSize,0);
+                    durationSum += quickSortInt -> duration.count();
                 }
                 cout << "Aktualny rozmiar tablicy to: " << arrayToAnalyseSize << endl;
                 durationToAnalyse = durationSum / durationCounter;
@@ -1249,7 +1053,442 @@ void analysis(){
             cout << "Zakonczono analize\n";
             break;
         }
-        */
+        case 6:{
+            int arrayToAnalyseSize;
+            int* arrayToAnalyse;
+            int* arrayToAnalyseSorted;
+            string fileOutName = "E:\\1_studia\\AiZO\\Projekt1\\rightQuickSortAnaliza.txt";
+
+            ofstream fileOut(fileOutName);
+
+
+            QuickSortInt* quickSortInt = new QuickSortInt();
+
+            double durationSum = 0;
+            const double durationCounter = 5.0;
+            double durationToAnalyse = 0;
+
+
+            //dla calkowicie losowej tablicy
+            for(int sizeMultiplier = 1; sizeMultiplier <= 64; sizeMultiplier *= 2){
+                arrayToAnalyseSize = 40000 * sizeMultiplier;
+                for(int i = 0; i < durationCounter; i++){
+                    arrayToAnalyse = quickSortInt -> generateRandArray(arrayToAnalyseSize, minimumAnalyse, maximumAnalyse);
+                    arrayToAnalyseSorted = quickSortInt -> sort(arrayToAnalyse, arrayToAnalyseSize,arrayToAnalyseSize - 1);
+                    durationSum += quickSortInt -> duration.count();
+                }
+                cout << "Aktualny rozmiar tablicy to: " << arrayToAnalyseSize << endl;
+                durationToAnalyse = durationSum / durationCounter;
+
+                if(fileOut.is_open()){
+                    fileOut << arrayToAnalyseSize << ";";
+                    fileOut << durationToAnalyse << endl;
+                }else{
+                    cerr << "Błąd: Nie można otworzyć pliku do zapisu." << endl;
+                }
+                delete[] arrayToAnalyse;
+                delete[] arrayToAnalyseSorted;
+
+                durationSum = 0;
+                durationToAnalyse = 0;
+            }
+
+            //dla tablicy pos. rosnaco
+            for(int sizeMultiplier = 1; sizeMultiplier <= 64; sizeMultiplier *= 2){
+                arrayToAnalyseSize = 40000 * sizeMultiplier;
+                for(int i = 0; i < durationCounter; i++){
+                    arrayToAnalyse = quickSortInt -> generateRandArray(arrayToAnalyseSize, minimumAnalyse, maximumAnalyse);
+                    sort(arrayToAnalyse, arrayToAnalyse + arrayToAnalyseSize);
+                    arrayToAnalyseSorted = quickSortInt -> sort(arrayToAnalyse, arrayToAnalyseSize,arrayToAnalyseSize - 1);
+                    durationSum += quickSortInt -> duration.count();
+                }
+                cout << "Aktualny rozmiar tablicy to: " << arrayToAnalyseSize << endl;
+                durationToAnalyse = durationSum / durationCounter;
+
+                if(fileOut.is_open()){
+                    fileOut << arrayToAnalyseSize << ";";
+                    fileOut << durationToAnalyse << endl;
+                }else{
+                    cerr << "Błąd: Nie można otworzyć pliku do zapisu." << endl;
+                }
+                delete[] arrayToAnalyse;
+                delete[] arrayToAnalyseSorted;
+
+                durationSum = 0;
+                durationToAnalyse = 0;
+            }
+
+            //dla tablicy pos. malejo
+            for(int sizeMultiplier = 1; sizeMultiplier <= 64; sizeMultiplier *= 2){
+                arrayToAnalyseSize = 40000 * sizeMultiplier;
+                for(int i = 0; i < durationCounter; i++){
+                    arrayToAnalyse = quickSortInt -> generateRandArray(arrayToAnalyseSize, minimumAnalyse, maximumAnalyse);
+                    sort(arrayToAnalyse,arrayToAnalyse + arrayToAnalyseSize, compare);
+                    arrayToAnalyseSorted = quickSortInt -> sort(arrayToAnalyse, arrayToAnalyseSize,arrayToAnalyseSize - 1);
+                    durationSum += quickSortInt -> duration.count();
+                }
+                cout << "Aktualny rozmiar tablicy to: " << arrayToAnalyseSize << endl;
+                durationToAnalyse = durationSum / durationCounter;
+
+                if(fileOut.is_open()){
+                    fileOut << arrayToAnalyseSize << ";";
+                    fileOut << durationToAnalyse << endl;
+                }else{
+                    cerr << "Błąd: Nie można otworzyć pliku do zapisu." << endl;
+                }
+                delete[] arrayToAnalyse;
+                delete[] arrayToAnalyseSorted;
+
+                durationSum = 0;
+                durationToAnalyse = 0;
+            }
+
+            //dla tablicy pos. w 33%
+            for(int sizeMultiplier = 1; sizeMultiplier <= 64; sizeMultiplier *= 2){
+                arrayToAnalyseSize = 40000 * sizeMultiplier;
+                for(int i = 0; i < durationCounter; i++){
+                    arrayToAnalyse = quickSortInt -> generateRandArray(arrayToAnalyseSize, minimumAnalyse, maximumAnalyse);
+                    sort(arrayToAnalyse, arrayToAnalyse + arrayToAnalyseSize / 3);
+                    arrayToAnalyseSorted = quickSortInt -> sort(arrayToAnalyse, arrayToAnalyseSize,arrayToAnalyseSize - 1);
+                    durationSum += quickSortInt -> duration.count();
+                }
+                cout << "Aktualny rozmiar tablicy to: " << arrayToAnalyseSize << endl;
+                durationToAnalyse = durationSum / durationCounter;
+
+                if(fileOut.is_open()){
+                    fileOut << arrayToAnalyseSize << ";";
+                    fileOut << durationToAnalyse << endl;
+                }else{
+                    cerr << "Błąd: Nie można otworzyć pliku do zapisu." << endl;
+                }
+                delete[] arrayToAnalyse;
+                delete[] arrayToAnalyseSorted;
+
+                durationSum = 0;
+                durationToAnalyse = 0;
+            }
+
+            //dla tablicy pos. w 66%
+            for(int sizeMultiplier = 1; sizeMultiplier <= 64; sizeMultiplier *= 2){
+                arrayToAnalyseSize = 40000 * sizeMultiplier;
+                for(int i = 0; i < durationCounter; i++){
+                    arrayToAnalyse = quickSortInt -> generateRandArray(arrayToAnalyseSize, minimumAnalyse, maximumAnalyse);
+                    sort(arrayToAnalyse, arrayToAnalyse + (arrayToAnalyseSize / 3) * 2);
+                    arrayToAnalyseSorted = quickSortInt -> sort(arrayToAnalyse, arrayToAnalyseSize,arrayToAnalyseSize - 1);
+                    durationSum += quickSortInt -> duration.count();
+                }
+                cout << "Aktualny rozmiar tablicy to: " << arrayToAnalyseSize << endl;
+                durationToAnalyse = durationSum / durationCounter;
+
+                if(fileOut.is_open()){
+                    fileOut << arrayToAnalyseSize << ";";
+                    fileOut << durationToAnalyse << endl;
+                }else{
+                    cerr << "Błąd: Nie można otworzyć pliku do zapisu." << endl;
+                }
+                delete[] arrayToAnalyse;
+                delete[] arrayToAnalyseSorted;
+
+                durationSum = 0;
+                durationToAnalyse = 0;
+            }
+
+
+            fileOut.close();
+            cout << "Zakonczono analize\n";
+            break;
+        }
+        case 7:{
+            int arrayToAnalyseSize;
+            int* arrayToAnalyse;
+            int* arrayToAnalyseSorted;
+            string fileOutName = "E:\\1_studia\\AiZO\\Projekt1\\middleQuickSortAnaliza.txt";
+
+            ofstream fileOut(fileOutName);
+
+
+            QuickSortInt* quickSortInt = new QuickSortInt();
+
+            double durationSum = 0;
+            const double durationCounter = 5.0;
+            double durationToAnalyse = 0;
+
+
+            //dla calkowicie losowej tablicy
+            for(int sizeMultiplier = 1; sizeMultiplier <= 64; sizeMultiplier *= 2){
+                arrayToAnalyseSize = 40000 * sizeMultiplier;
+                for(int i = 0; i < durationCounter; i++){
+                    arrayToAnalyse = quickSortInt -> generateRandArray(arrayToAnalyseSize, minimumAnalyse, maximumAnalyse);
+                    arrayToAnalyseSorted = quickSortInt -> sort(arrayToAnalyse, arrayToAnalyseSize,arrayToAnalyseSize/2);
+                    durationSum += quickSortInt -> duration.count();
+                }
+                cout << "Aktualny rozmiar tablicy to: " << arrayToAnalyseSize << endl;
+                durationToAnalyse = durationSum / durationCounter;
+
+                if(fileOut.is_open()){
+                    fileOut << arrayToAnalyseSize << ";";
+                    fileOut << durationToAnalyse << endl;
+                }else{
+                    cerr << "Błąd: Nie można otworzyć pliku do zapisu." << endl;
+                }
+                delete[] arrayToAnalyse;
+                delete[] arrayToAnalyseSorted;
+
+                durationSum = 0;
+                durationToAnalyse = 0;
+            }
+
+            //dla tablicy pos. rosnaco
+            for(int sizeMultiplier = 1; sizeMultiplier <= 64; sizeMultiplier *= 2){
+                arrayToAnalyseSize = 40000 * sizeMultiplier;
+                for(int i = 0; i < durationCounter; i++){
+                    arrayToAnalyse = quickSortInt -> generateRandArray(arrayToAnalyseSize, minimumAnalyse, maximumAnalyse);
+                    sort(arrayToAnalyse, arrayToAnalyse + arrayToAnalyseSize);
+                    arrayToAnalyseSorted = quickSortInt -> sort(arrayToAnalyse, arrayToAnalyseSize,arrayToAnalyseSize/2);
+                    durationSum += quickSortInt -> duration.count();
+                }
+                cout << "Aktualny rozmiar tablicy to: " << arrayToAnalyseSize << endl;
+                durationToAnalyse = durationSum / durationCounter;
+
+                if(fileOut.is_open()){
+                    fileOut << arrayToAnalyseSize << ";";
+                    fileOut << durationToAnalyse << endl;
+                }else{
+                    cerr << "Błąd: Nie można otworzyć pliku do zapisu." << endl;
+                }
+                delete[] arrayToAnalyse;
+                delete[] arrayToAnalyseSorted;
+
+                durationSum = 0;
+                durationToAnalyse = 0;
+            }
+
+            //dla tablicy pos. malejo
+            for(int sizeMultiplier = 1; sizeMultiplier <= 64; sizeMultiplier *= 2){
+                arrayToAnalyseSize = 40000 * sizeMultiplier;
+                for(int i = 0; i < durationCounter; i++){
+                    arrayToAnalyse = quickSortInt -> generateRandArray(arrayToAnalyseSize, minimumAnalyse, maximumAnalyse);
+                    sort(arrayToAnalyse,arrayToAnalyse + arrayToAnalyseSize, compare);
+                    arrayToAnalyseSorted = quickSortInt -> sort(arrayToAnalyse, arrayToAnalyseSize,arrayToAnalyseSize/2);
+                    durationSum += quickSortInt -> duration.count();
+                }
+                cout << "Aktualny rozmiar tablicy to: " << arrayToAnalyseSize << endl;
+                durationToAnalyse = durationSum / durationCounter;
+
+                if(fileOut.is_open()){
+                    fileOut << arrayToAnalyseSize << ";";
+                    fileOut << durationToAnalyse << endl;
+                }else{
+                    cerr << "Błąd: Nie można otworzyć pliku do zapisu." << endl;
+                }
+                delete[] arrayToAnalyse;
+                delete[] arrayToAnalyseSorted;
+
+                durationSum = 0;
+                durationToAnalyse = 0;
+            }
+
+            //dla tablicy pos. w 33%
+            for(int sizeMultiplier = 1; sizeMultiplier <= 64; sizeMultiplier *= 2){
+                arrayToAnalyseSize = 40000 * sizeMultiplier;
+                for(int i = 0; i < durationCounter; i++){
+                    arrayToAnalyse = quickSortInt -> generateRandArray(arrayToAnalyseSize, minimumAnalyse, maximumAnalyse);
+                    sort(arrayToAnalyse, arrayToAnalyse + arrayToAnalyseSize / 3);
+                    arrayToAnalyseSorted = quickSortInt -> sort(arrayToAnalyse, arrayToAnalyseSize,arrayToAnalyseSize/2);
+                    durationSum += quickSortInt -> duration.count();
+                }
+                cout << "Aktualny rozmiar tablicy to: " << arrayToAnalyseSize << endl;
+                durationToAnalyse = durationSum / durationCounter;
+
+                if(fileOut.is_open()){
+                    fileOut << arrayToAnalyseSize << ";";
+                    fileOut << durationToAnalyse << endl;
+                }else{
+                    cerr << "Błąd: Nie można otworzyć pliku do zapisu." << endl;
+                }
+                delete[] arrayToAnalyse;
+                delete[] arrayToAnalyseSorted;
+
+                durationSum = 0;
+                durationToAnalyse = 0;
+            }
+
+            //dla tablicy pos. w 66%
+            for(int sizeMultiplier = 1; sizeMultiplier <= 64; sizeMultiplier *= 2){
+                arrayToAnalyseSize = 40000 * sizeMultiplier;
+                for(int i = 0; i < durationCounter; i++){
+                    arrayToAnalyse = quickSortInt -> generateRandArray(arrayToAnalyseSize, minimumAnalyse, maximumAnalyse);
+                    sort(arrayToAnalyse, arrayToAnalyse + (arrayToAnalyseSize / 3) * 2);
+                    arrayToAnalyseSorted = quickSortInt -> sort(arrayToAnalyse, arrayToAnalyseSize,arrayToAnalyseSize/2);
+                    durationSum += quickSortInt -> duration.count();
+                }
+                cout << "Aktualny rozmiar tablicy to: " << arrayToAnalyseSize << endl;
+                durationToAnalyse = durationSum / durationCounter;
+
+                if(fileOut.is_open()){
+                    fileOut << arrayToAnalyseSize << ";";
+                    fileOut << durationToAnalyse << endl;
+                }else{
+                    cerr << "Błąd: Nie można otworzyć pliku do zapisu." << endl;
+                }
+                delete[] arrayToAnalyse;
+                delete[] arrayToAnalyseSorted;
+
+                durationSum = 0;
+                durationToAnalyse = 0;
+            }
+
+
+            fileOut.close();
+            cout << "Zakonczono analize\n";
+            break;
+        }
+        case 8:{
+            int arrayToAnalyseSize;
+            int* arrayToAnalyse;
+            int* arrayToAnalyseSorted;
+            string fileOutName = "E:\\1_studia\\AiZO\\Projekt1\\randQuickSortAnaliza.txt";
+
+            ofstream fileOut(fileOutName);
+
+
+            QuickSortInt* quickSortInt = new QuickSortInt();
+
+            double durationSum = 0;
+            const double durationCounter = 5.0;
+            double durationToAnalyse = 0;
+
+
+            //dla calkowicie losowej tablicy
+            for(int sizeMultiplier = 1; sizeMultiplier <= 64; sizeMultiplier *= 2){
+                arrayToAnalyseSize = 40000 * sizeMultiplier;
+                for(int i = 0; i < durationCounter; i++){
+                    arrayToAnalyse = quickSortInt -> generateRandArray(arrayToAnalyseSize, minimumAnalyse, maximumAnalyse);
+                    arrayToAnalyseSorted = quickSortInt -> sort(arrayToAnalyse, arrayToAnalyseSize,rand() % arrayToAnalyseSize);
+                    durationSum += quickSortInt -> duration.count();
+                }
+                cout << "Aktualny rozmiar tablicy to: " << arrayToAnalyseSize << endl;
+                durationToAnalyse = durationSum / durationCounter;
+
+                if(fileOut.is_open()){
+                    fileOut << arrayToAnalyseSize << ";";
+                    fileOut << durationToAnalyse << endl;
+                }else{
+                    cerr << "Błąd: Nie można otworzyć pliku do zapisu." << endl;
+                }
+                delete[] arrayToAnalyse;
+                delete[] arrayToAnalyseSorted;
+
+                durationSum = 0;
+                durationToAnalyse = 0;
+            }
+
+            //dla tablicy pos. rosnaco
+            for(int sizeMultiplier = 1; sizeMultiplier <= 64; sizeMultiplier *= 2){
+                arrayToAnalyseSize = 40000 * sizeMultiplier;
+                for(int i = 0; i < durationCounter; i++){
+                    arrayToAnalyse = quickSortInt -> generateRandArray(arrayToAnalyseSize, minimumAnalyse, maximumAnalyse);
+                    sort(arrayToAnalyse, arrayToAnalyse + arrayToAnalyseSize);
+                    arrayToAnalyseSorted = quickSortInt -> sort(arrayToAnalyse, arrayToAnalyseSize,rand() % arrayToAnalyseSize);
+                    durationSum += quickSortInt -> duration.count();
+                }
+                cout << "Aktualny rozmiar tablicy to: " << arrayToAnalyseSize << endl;
+                durationToAnalyse = durationSum / durationCounter;
+
+                if(fileOut.is_open()){
+                    fileOut << arrayToAnalyseSize << ";";
+                    fileOut << durationToAnalyse << endl;
+                }else{
+                    cerr << "Błąd: Nie można otworzyć pliku do zapisu." << endl;
+                }
+                delete[] arrayToAnalyse;
+                delete[] arrayToAnalyseSorted;
+
+                durationSum = 0;
+                durationToAnalyse = 0;
+            }
+
+            //dla tablicy pos. malejo
+            for(int sizeMultiplier = 1; sizeMultiplier <= 64; sizeMultiplier *= 2){
+                arrayToAnalyseSize = 40000 * sizeMultiplier;
+                for(int i = 0; i < durationCounter; i++){
+                    arrayToAnalyse = quickSortInt -> generateRandArray(arrayToAnalyseSize, minimumAnalyse, maximumAnalyse);
+                    sort(arrayToAnalyse,arrayToAnalyse + arrayToAnalyseSize, compare);
+                    arrayToAnalyseSorted = quickSortInt -> sort(arrayToAnalyse, arrayToAnalyseSize,rand() % arrayToAnalyseSize);
+                    durationSum += quickSortInt -> duration.count();
+                }
+                cout << "Aktualny rozmiar tablicy to: " << arrayToAnalyseSize << endl;
+                durationToAnalyse = durationSum / durationCounter;
+
+                if(fileOut.is_open()){
+                    fileOut << arrayToAnalyseSize << ";";
+                    fileOut << durationToAnalyse << endl;
+                }else{
+                    cerr << "Błąd: Nie można otworzyć pliku do zapisu." << endl;
+                }
+                delete[] arrayToAnalyse;
+                delete[] arrayToAnalyseSorted;
+
+                durationSum = 0;
+                durationToAnalyse = 0;
+            }
+
+            //dla tablicy pos. w 33%
+            for(int sizeMultiplier = 1; sizeMultiplier <= 64; sizeMultiplier *= 2){
+                arrayToAnalyseSize = 40000 * sizeMultiplier;
+                for(int i = 0; i < durationCounter; i++){
+                    arrayToAnalyse = quickSortInt -> generateRandArray(arrayToAnalyseSize, minimumAnalyse, maximumAnalyse);
+                    sort(arrayToAnalyse, arrayToAnalyse + arrayToAnalyseSize / 3);
+                    arrayToAnalyseSorted = quickSortInt -> sort(arrayToAnalyse, arrayToAnalyseSize,rand() % arrayToAnalyseSize);
+                    durationSum += quickSortInt -> duration.count();
+                }
+                cout << "Aktualny rozmiar tablicy to: " << arrayToAnalyseSize << endl;
+                durationToAnalyse = durationSum / durationCounter;
+
+                if(fileOut.is_open()){
+                    fileOut << arrayToAnalyseSize << ";";
+                    fileOut << durationToAnalyse << endl;
+                }else{
+                    cerr << "Błąd: Nie można otworzyć pliku do zapisu." << endl;
+                }
+                delete[] arrayToAnalyse;
+                delete[] arrayToAnalyseSorted;
+
+                durationSum = 0;
+                durationToAnalyse = 0;
+            }
+
+            //dla tablicy pos. w 66%
+            for(int sizeMultiplier = 1; sizeMultiplier <= 64; sizeMultiplier *= 2){
+                arrayToAnalyseSize = 40000 * sizeMultiplier;
+                for(int i = 0; i < durationCounter; i++){
+                    arrayToAnalyse = quickSortInt -> generateRandArray(arrayToAnalyseSize, minimumAnalyse, maximumAnalyse);
+                    sort(arrayToAnalyse, arrayToAnalyse + (arrayToAnalyseSize / 3) * 2);
+                    arrayToAnalyseSorted = quickSortInt -> sort(arrayToAnalyse, arrayToAnalyseSize,rand() % arrayToAnalyseSize);
+                    durationSum += quickSortInt -> duration.count();
+                }
+                cout << "Aktualny rozmiar tablicy to: " << arrayToAnalyseSize << endl;
+                durationToAnalyse = durationSum / durationCounter;
+
+                if(fileOut.is_open()){
+                    fileOut << arrayToAnalyseSize << ";";
+                    fileOut << durationToAnalyse << endl;
+                }else{
+                    cerr << "Błąd: Nie można otworzyć pliku do zapisu." << endl;
+                }
+                delete[] arrayToAnalyse;
+                delete[] arrayToAnalyseSorted;
+
+                durationSum = 0;
+                durationToAnalyse = 0;
+            }
+
+
+            fileOut.close();
+            cout << "Zakonczono analize\n";
+            break;
+        }
+
         default:
             cout << "Blednie podano nr algorytmu!!!\n";
             break;
