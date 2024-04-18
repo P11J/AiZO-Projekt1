@@ -1,6 +1,4 @@
-//
-// Created by gutek on 06.04.2024.
-//
+
 
 #include <chrono>
 #include <cmath> //dla pow()

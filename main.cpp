@@ -13,312 +13,18 @@ using namespace std;
 
 
 
-
-
 bool compare(int a, int b); //funkcja pozwalajaca na sortowanie tablicy malejaco
 
 void analysis(); //naglowek dla funkcji przeprowadzajacej analize danego algorytmu
 
+int menu1(); //naglowek dla menu pierwszego poziomu
 
-int menu1(){ //menu 1. poziomu
-    cout << "Wybierz typ danych: \n";
-    cout << "1 - int\n";
-    cout << "2 - float\n";
-    cout << "3 - double\n";
-    int choice = 0;
-    cin >> choice;
-    return choice;
-}
-
-void menu2(int type){ //menu 2. poziomu, zależne od wybranego typu danych
-    cout << "\nWybierz akcje:\n";
-    cout << "1 - Wyswietl wczytana/wygenerowana tablice\n";
-    cout << "2 - Wygeneruj losowa tablice o zadanym rozmiarze\n";
-    cout << "3 - Wygeneruj tablice posortowana rosnaco\n";
-    cout << "4 - Wygeneruj tablice posortowana malejaco\n";
-    cout << "5 - Wygeneruj tablice posortowana w 33%\n";
-    cout << "6 - Wygeneruj tablice posortowana w 66%\n";
-    cout << "7 - Wczytaj dane tablicy z pliku txt\n";
-    cout << "8 - Uruchom wybrany algorytm sortowania\n";
-    cout << "9 - Wyswietl posortowana kopie tablicy\n";
-    cout << "10 - Pokaz ponownie menu\n";
-    cout << "11 - Uruchom analize wybranego algorytmu\n";
-    cout << "12 - Wyjdz z programu\n\n";
-    int choice = 0;
-
-    if(type == 1) {
-        int arraySize = 0;
-        int* array;
-        int* arraySorted;
-        do {
-            cin >> choice;
-            switch (choice) {
-                case 1: {
-                    cout << "Tablica przed posortowaniem\n";
-                    SortAlgInt::printArray(array,arraySize);
-                    break;
-                }
-                case 2: {
-                    int minimum = 0;
-                    int maximum = 0;
-                    cout << "Podaj rozmiar generowanej tablicy:\n";
-                    int tempArraySize;
-                    cin >> tempArraySize;
-                    cout << "Jej minimum:\n";
-                    cin >> minimum;
-                    cout << "Oraz maximum:\n";
-                    cin >> maximum;
-                    SortAlgInt* sortAlgInt = new SortAlgInt();
-                    int* tempArray = sortAlgInt->generateRandArray(tempArraySize,minimum,maximum);//generacja losowej tablicy
-                    delete[]array;
-                    array = tempArray;
-                    arraySize = tempArraySize;
-                    break;
-                }
-                case 3:{
-                    int minimum = 0;
-                    int maximum = 0;
-                    cout << "Podaj rozmiar generowanej tablicy:\n";
-                    int tempArraySize;
-                    cin >> tempArraySize;
-                    cout << "Jej minimum:\n";
-                    cin >> minimum;
-                    cout << "Oraz maximum:\n";
-                    cin >> maximum;
-                    SortAlgInt* sortAlgInt = new SortAlgInt();
-                    int* tempArray = sortAlgInt->generateRandArray(tempArraySize,minimum,maximum);
-                    sort(tempArray, tempArray + tempArraySize);//sortowanie losowej tablicy
-                    delete[]array;
-                    array = tempArray;
-                    arraySize = tempArraySize;
-                    break;
-                }
-                case 4:{
-                    int minimum = 0;
-                    int maximum = 0;
-                    cout << "Podaj rozmiar generowanej tablicy:\n";
-                    int tempArraySize;
-                    cin >> tempArraySize;
-                    cout << "Jej minimum:\n";
-                    cin >> minimum;
-                    cout << "Oraz maximum:\n";
-                    cin >> maximum;
-
-                    SortAlgInt* sortAlgInt = new SortAlgInt();
-                    int* tempArray = sortAlgInt->generateRandArray(tempArraySize,minimum,maximum);
-                    sort(tempArray, tempArray + tempArraySize, compare);//sortowanie malejaco losowej tablicy
-
-                    delete[]array;
-                    array = tempArray;
-                    arraySize = tempArraySize;
-                    break;
-                }
-                case 5:{
-                    int minimum = 0;
-                    int maximum = 0;
-                    cout << "Podaj rozmiar generowanej tablicy:\n";
-                    int tempArraySize;
-                    cin >> tempArraySize;
-                    cout << "Jej minimum:\n";
-                    cin >> minimum;
-                    cout << "Oraz maximum:\n";
-                    cin >> maximum;
-                    SortAlgInt* sortAlgInt = new SortAlgInt();
-                    int* tempArray = sortAlgInt->generateRandArray(tempArraySize,minimum,maximum);
-                    int sortingSize = tempArraySize / 3; //sortujemy do 1/3 elementow
-                    sort(tempArray, tempArray + sortingSize);
-                    delete[]array;
-                    array = tempArray;
-                    arraySize = tempArraySize;
-                    break;
-
-                }
-                case 6:{
-                    int minimum = 0;
-                    int maximum = 0;
-                    cout << "Podaj rozmiar generowanej tablicy:\n";
-                    int tempArraySize;
-                    cin >> tempArraySize;
-                    cout << "Jej minimum:\n";
-                    cin >> minimum;
-                    cout << "Oraz maximum:\n";
-                    cin >> maximum;
-                    SortAlgInt* sortAlgInt = new SortAlgInt();
-                    int* tempArray = sortAlgInt->generateRandArray(tempArraySize,minimum,maximum);
-                    int sortingSize = (tempArraySize / 3) * 2; //sortujemy do 2/3 elementow
-                    sort(tempArray, tempArray + sortingSize);
-                    delete[]array;
-                    array = tempArray;
-                    arraySize = tempArraySize;
-                    break;
-                }
-                case 7: {
-                    cout << "Podaj nazwe pliku txt znajdujacego sie w katalogu projektu z danymi tablicy:\n";
-                    string fileName;
-                    cin >> fileName;
-                    ifstream file(fileName);
-                    int* tempArray;
-                    int tempArraySize = 0;
-                    int value;
-
-                    if(file.is_open()){
-                        while(file >> value){
-                            int* tempArray2 = new int[tempArraySize + 1];//po kazdej odczytanej wartosci z pliku tworzymy nowa tablice
-                            for (int i = 0; i < tempArraySize; i++)//o 1 wieksza i dopisujemy nowa wartosc
-                                tempArray2[i] = tempArray[i];
-
-                            tempArray2[tempArraySize] = value;
-                            delete[] tempArray;
-                            tempArray = tempArray2;
-                            tempArraySize++;
-                        }
-                        delete[]array;
-                        array = tempArray;
-                        arraySize = tempArraySize;
-                        file.close();
-                    }else{
-                        cout << "Wystapil blad przy odczycie pliku\n";
-                        cerr << strerror(errno); //wyswietla blad odczytu pliku
-                    }
-
-                    break;
-                }
-                case 8:{
-                    cout << "Wybierz algorytm sortowania:\n";
-                    cout << "1 - Insertion Sort\n";
-                    cout << "2 - Heap Sort\n";
-                    cout << "3 - Shell Sort metoda Shella\n";
-                    cout << "4 - Shell Sort metoda Hibbarda\n";
-                    cout << "5 - Quick Sort ze skrajnym lewym pivotem\n";
-                    cout << "6 - Quick Sort ze skrajnym prawym pivotem\n";
-                    cout << "7 - Quick Sort ze srodkowym pivotem\n";
-                    cout << "8 - Quick Sort z losowym pivotem\n";
-                    int algChoice;
-                    cin >> algChoice;
-
-                    switch (algChoice) {
-                        case 1:{
-                            InsertionSortInt* insertionSortInt = new InsertionSortInt();
-                            arraySorted = insertionSortInt -> sortArray(array, arraySize);
-                            cout << insertionSortInt -> duration << endl;
-                            if(insertionSortInt -> isSorted(arraySorted,arraySize))
-                                cout << "Tablica zostala posortowana prawidlowo.\n";
-                            break;
-                        }
-                        case 2:{
-                            HeapSortInt* heapSortInt = new HeapSortInt();
-                            arraySorted = heapSortInt ->sortArray(array, arraySize);
-                            cout << heapSortInt -> duration << endl;
-                            if(heapSortInt -> isSorted(arraySorted,arraySize))
-                                cout << "Tablica zostala posortowana prawidlowo.\n";
-                            break;
-                        }
-                        case 3:{
-                            ShellSortInt* shellSortInt = new ShellSortInt();
-                            arraySorted = shellSortInt ->sortShell(array, arraySize);
-                            cout << shellSortInt -> duration << endl;
-                            if(shellSortInt -> isSorted(arraySorted,arraySize))
-                                cout << "Tablica zostala posortowana prawidlowo.\n";
-                            break;
-                        }
-                        case 4:{
-                            ShellSortInt* shellSortInt = new ShellSortInt();
-                            arraySorted = shellSortInt ->sortHibbard(array, arraySize);
-                            cout << shellSortInt -> duration << endl;
-                            if(shellSortInt -> isSorted(arraySorted,arraySize))
-                                cout << "Tablica zostala posortowana prawidlowo.\n";
-                            break;
-                        }
-
-                        case 5:{
-                            QuickSortInt* quickSortInt = new QuickSortInt();
-                            arraySorted = quickSortInt -> sort(array, arraySize, 0); //lewy pivot
-                            cout << quickSortInt -> duration << endl;
-                            if(quickSortInt -> isSorted(arraySorted,arraySize))
-                                cout << "Tablica zostala posortowana prawidlowo.\n";
-                            break;
-                        }
-                        case 6:{
-                            QuickSortInt* quickSortInt = new QuickSortInt();
-                            arraySorted = quickSortInt -> sort(array, arraySize, arraySize - 1); //prawy pivot
-                            cout << quickSortInt -> duration << endl;
-                            if(quickSortInt -> isSorted(arraySorted,arraySize))
-                                cout << "Tablica zostala posortowana prawidlowo.\n";
-                            break;
-                        }
-                        case 7:{
-                            QuickSortInt* quickSortInt = new QuickSortInt();
-                            arraySorted = quickSortInt -> sort(array, arraySize, arraySize / 2); //srodkowy pivot
-                            cout << quickSortInt -> duration << endl;
-                            if(quickSortInt -> isSorted(arraySorted,arraySize))
-                                cout << "Tablica zostala posortowana prawidlowo.\n";
-                            break;
-                        }
-                        case 8: {
-                            srand(time(nullptr));
-                            QuickSortInt* quickSortInt = new QuickSortInt();
-                            arraySorted = quickSortInt->sort(array, arraySize, rand() % arraySize); //losowy pivot
-                            cout << quickSortInt -> duration << endl;
-                            if(quickSortInt -> isSorted(arraySorted,arraySize))
-                                cout << "Tablica zostala posortowana prawidlowo.\n";
-                            break;
-                        }
-                        default:{
-                            cout << "Zle wybrano algorytm sortowania!!!\n";
-                        }
-                    }
-                    break;
-                }
-                case 9:{
-                    cout << "Tablica po posortowaniu:\n";
-                    SortAlgInt::printArray(arraySorted,arraySize);
-                    break;
-                }
-                case 10:{
-                    cout << "\nWybierz akcje:\n";
-                    cout << "1 - Wyswietl wczytana/wygenerowana tablice\n";
-                    cout << "2 - Wygeneruj losowa tablice o zadanym rozmiarze\n";
-                    cout << "3 - Wygeneruj tablice posortowana rosnaco\n";
-                    cout << "4 - Wygeneruj tablice posortowana malejaco\n";
-                    cout << "5 - Wygeneruj tablice posortowana w 33%\n";
-                    cout << "6 - Wygeneruj tablice posortowana w 66%\n";
-                    cout << "7 - Wczytaj dane tablicy z pliku txt\n";
-                    cout << "8 - Uruchom wybrany algorytm sortowania\n";
-                    cout << "9 - Wyswietl posortowana kopie tablicy\n";
-                    cout << "10 - Pokaz ponownie menu\n";
-                    cout << "11 - Uruchom analize wybranego algorytmu\n";
-                    cout << "12 - Wyjdz z programu\n\n";
-                    break;
-                }
-                case 11:{
-                    //zakres losowanych liczb 1 - 30000
-                    analysis();
-
-                    break;
-                }
-                case 12: {
-                    cout << "Zakonczono program.\n";
-                    return;
-                }
-                default: {
-                    cout << "Podano bledny argument!!!\n";
-                }
-            }
-        } while (choice != 12);
-
-    }else if(type == 2){
-        //
-    }else if(type == 3){
-        //
-    }
-}
+void menu2(int type); //naglowek dla menu drugiego rzedu
 
 
 
 int main() {
     menu2(menu1());
-
-
 
     return 0;
 }
@@ -921,7 +627,7 @@ void analysis(){
 
             double durationSum = 0;
             const double durationCounter = 5.0;
-            double durationToAnalyse = 0;
+            double durationToAnalyse;
 
 
             //dla calkowicie losowej tablicy
@@ -945,7 +651,6 @@ void analysis(){
                 delete[] arrayToAnalyseSorted;
 
                 durationSum = 0;
-                durationToAnalyse = 0;
             }
 
             //dla tablicy pos. rosnaco
@@ -970,7 +675,6 @@ void analysis(){
                 delete[] arrayToAnalyseSorted;
 
                 durationSum = 0;
-                durationToAnalyse = 0;
             }
 
             //dla tablicy pos. malejo
@@ -995,7 +699,6 @@ void analysis(){
                 delete[] arrayToAnalyseSorted;
 
                 durationSum = 0;
-                durationToAnalyse = 0;
             }
 
             //dla tablicy pos. w 33%
@@ -1020,7 +723,6 @@ void analysis(){
                 delete[] arrayToAnalyseSorted;
 
                 durationSum = 0;
-                durationToAnalyse = 0;
             }
 
             //dla tablicy pos. w 66%
@@ -1045,7 +747,6 @@ void analysis(){
                 delete[] arrayToAnalyseSorted;
 
                 durationSum = 0;
-                durationToAnalyse = 0;
             }
 
 
@@ -1066,7 +767,7 @@ void analysis(){
 
             double durationSum = 0;
             const double durationCounter = 5.0;
-            double durationToAnalyse = 0;
+            double durationToAnalyse;
 
 
             //dla calkowicie losowej tablicy
@@ -1090,7 +791,6 @@ void analysis(){
                 delete[] arrayToAnalyseSorted;
 
                 durationSum = 0;
-                durationToAnalyse = 0;
             }
 
             //dla tablicy pos. rosnaco
@@ -1115,7 +815,6 @@ void analysis(){
                 delete[] arrayToAnalyseSorted;
 
                 durationSum = 0;
-                durationToAnalyse = 0;
             }
 
             //dla tablicy pos. malejo
@@ -1140,7 +839,6 @@ void analysis(){
                 delete[] arrayToAnalyseSorted;
 
                 durationSum = 0;
-                durationToAnalyse = 0;
             }
 
             //dla tablicy pos. w 33%
@@ -1165,7 +863,6 @@ void analysis(){
                 delete[] arrayToAnalyseSorted;
 
                 durationSum = 0;
-                durationToAnalyse = 0;
             }
 
             //dla tablicy pos. w 66%
@@ -1190,7 +887,6 @@ void analysis(){
                 delete[] arrayToAnalyseSorted;
 
                 durationSum = 0;
-                durationToAnalyse = 0;
             }
 
 
@@ -1211,7 +907,7 @@ void analysis(){
 
             double durationSum = 0;
             const double durationCounter = 5.0;
-            double durationToAnalyse = 0;
+            double durationToAnalyse;
 
 
             //dla calkowicie losowej tablicy
@@ -1235,7 +931,6 @@ void analysis(){
                 delete[] arrayToAnalyseSorted;
 
                 durationSum = 0;
-                durationToAnalyse = 0;
             }
 
             //dla tablicy pos. rosnaco
@@ -1260,7 +955,6 @@ void analysis(){
                 delete[] arrayToAnalyseSorted;
 
                 durationSum = 0;
-                durationToAnalyse = 0;
             }
 
             //dla tablicy pos. malejo
@@ -1285,7 +979,6 @@ void analysis(){
                 delete[] arrayToAnalyseSorted;
 
                 durationSum = 0;
-                durationToAnalyse = 0;
             }
 
             //dla tablicy pos. w 33%
@@ -1310,7 +1003,6 @@ void analysis(){
                 delete[] arrayToAnalyseSorted;
 
                 durationSum = 0;
-                durationToAnalyse = 0;
             }
 
             //dla tablicy pos. w 66%
@@ -1335,7 +1027,6 @@ void analysis(){
                 delete[] arrayToAnalyseSorted;
 
                 durationSum = 0;
-                durationToAnalyse = 0;
             }
 
 
@@ -1356,7 +1047,7 @@ void analysis(){
 
             double durationSum = 0;
             const double durationCounter = 5.0;
-            double durationToAnalyse = 0;
+            double durationToAnalyse;
 
 
             //dla calkowicie losowej tablicy
@@ -1380,7 +1071,6 @@ void analysis(){
                 delete[] arrayToAnalyseSorted;
 
                 durationSum = 0;
-                durationToAnalyse = 0;
             }
 
             //dla tablicy pos. rosnaco
@@ -1405,7 +1095,6 @@ void analysis(){
                 delete[] arrayToAnalyseSorted;
 
                 durationSum = 0;
-                durationToAnalyse = 0;
             }
 
             //dla tablicy pos. malejo
@@ -1430,7 +1119,6 @@ void analysis(){
                 delete[] arrayToAnalyseSorted;
 
                 durationSum = 0;
-                durationToAnalyse = 0;
             }
 
             //dla tablicy pos. w 33%
@@ -1455,7 +1143,6 @@ void analysis(){
                 delete[] arrayToAnalyseSorted;
 
                 durationSum = 0;
-                durationToAnalyse = 0;
             }
 
             //dla tablicy pos. w 66%
@@ -1480,7 +1167,6 @@ void analysis(){
                 delete[] arrayToAnalyseSorted;
 
                 durationSum = 0;
-                durationToAnalyse = 0;
             }
 
 
@@ -1494,4 +1180,297 @@ void analysis(){
             break;
     }
     cout << "Zakonczono analize\n";
+}
+
+int menu1(){ //menu 1. poziomu
+    cout << "Wybierz typ danych: \n";
+    cout << "1 - int\n";
+    cout << "2 - float\n";
+    cout << "3 - double\n";
+    int choice = 0;
+    cin >> choice;
+    return choice;
+}
+
+void menu2(int type){ //menu 2. poziomu, zależne od wybranego typu danych
+    cout << "\nWybierz akcje:\n";
+    cout << "1 - Wyswietl wczytana/wygenerowana tablice\n";
+    cout << "2 - Wygeneruj losowa tablice o zadanym rozmiarze\n";
+    cout << "3 - Wygeneruj tablice posortowana rosnaco\n";
+    cout << "4 - Wygeneruj tablice posortowana malejaco\n";
+    cout << "5 - Wygeneruj tablice posortowana w 33%\n";
+    cout << "6 - Wygeneruj tablice posortowana w 66%\n";
+    cout << "7 - Wczytaj dane tablicy z pliku txt\n";
+    cout << "8 - Uruchom wybrany algorytm sortowania\n";
+    cout << "9 - Wyswietl posortowana kopie tablicy\n";
+    cout << "10 - Pokaz ponownie menu\n";
+    cout << "11 - Uruchom analize wybranego algorytmu\n";
+    cout << "12 - Wyjdz z programu\n\n";
+    int choice = 0;
+
+    if(type == 1) {
+        int arraySize = 0;
+        int* array;
+        int* arraySorted;
+        do {
+            cin >> choice;
+            switch (choice) {
+                case 1: {
+                    cout << "Tablica przed posortowaniem\n";
+                    SortAlgInt::printArray(array,arraySize);
+                    break;
+                }
+                case 2: {
+                    int minimum = 0;
+                    int maximum = 0;
+                    cout << "Podaj rozmiar generowanej tablicy:\n";
+                    int tempArraySize;
+                    cin >> tempArraySize;
+                    cout << "Jej minimum:\n";
+                    cin >> minimum;
+                    cout << "Oraz maximum:\n";
+                    cin >> maximum;
+                    SortAlgInt* sortAlgInt = new SortAlgInt();
+                    int* tempArray = sortAlgInt->generateRandArray(tempArraySize,minimum,maximum);//generacja losowej tablicy
+                    delete[]array;
+                    array = tempArray;
+                    arraySize = tempArraySize;
+                    break;
+                }
+                case 3:{
+                    int minimum = 0;
+                    int maximum = 0;
+                    cout << "Podaj rozmiar generowanej tablicy:\n";
+                    int tempArraySize;
+                    cin >> tempArraySize;
+                    cout << "Jej minimum:\n";
+                    cin >> minimum;
+                    cout << "Oraz maximum:\n";
+                    cin >> maximum;
+                    SortAlgInt* sortAlgInt = new SortAlgInt();
+                    int* tempArray = sortAlgInt->generateRandArray(tempArraySize,minimum,maximum);
+                    sort(tempArray, tempArray + tempArraySize);//sortowanie losowej tablicy
+                    delete[]array;
+                    array = tempArray;
+                    arraySize = tempArraySize;
+                    break;
+                }
+                case 4:{
+                    int minimum = 0;
+                    int maximum = 0;
+                    cout << "Podaj rozmiar generowanej tablicy:\n";
+                    int tempArraySize;
+                    cin >> tempArraySize;
+                    cout << "Jej minimum:\n";
+                    cin >> minimum;
+                    cout << "Oraz maximum:\n";
+                    cin >> maximum;
+
+                    SortAlgInt* sortAlgInt = new SortAlgInt();
+                    int* tempArray = sortAlgInt->generateRandArray(tempArraySize,minimum,maximum);
+                    sort(tempArray, tempArray + tempArraySize, compare);//sortowanie malejaco losowej tablicy
+
+                    delete[]array;
+                    array = tempArray;
+                    arraySize = tempArraySize;
+                    break;
+                }
+                case 5:{
+                    int minimum = 0;
+                    int maximum = 0;
+                    cout << "Podaj rozmiar generowanej tablicy:\n";
+                    int tempArraySize;
+                    cin >> tempArraySize;
+                    cout << "Jej minimum:\n";
+                    cin >> minimum;
+                    cout << "Oraz maximum:\n";
+                    cin >> maximum;
+                    SortAlgInt* sortAlgInt = new SortAlgInt();
+                    int* tempArray = sortAlgInt->generateRandArray(tempArraySize,minimum,maximum);
+                    int sortingSize = tempArraySize / 3; //sortujemy do 1/3 elementow
+                    sort(tempArray, tempArray + sortingSize);
+                    delete[]array;
+                    array = tempArray;
+                    arraySize = tempArraySize;
+                    break;
+
+                }
+                case 6:{
+                    int minimum = 0;
+                    int maximum = 0;
+                    cout << "Podaj rozmiar generowanej tablicy:\n";
+                    int tempArraySize;
+                    cin >> tempArraySize;
+                    cout << "Jej minimum:\n";
+                    cin >> minimum;
+                    cout << "Oraz maximum:\n";
+                    cin >> maximum;
+                    SortAlgInt* sortAlgInt = new SortAlgInt();
+                    int* tempArray = sortAlgInt->generateRandArray(tempArraySize,minimum,maximum);
+                    int sortingSize = (tempArraySize / 3) * 2; //sortujemy do 2/3 elementow
+                    sort(tempArray, tempArray + sortingSize);
+                    delete[]array;
+                    array = tempArray;
+                    arraySize = tempArraySize;
+                    break;
+                }
+                case 7: {
+                    cout << "Podaj nazwe pliku txt znajdujacego sie w katalogu projektu z danymi tablicy:\n";
+                    string fileName;
+                    cin >> fileName;
+                    ifstream file(fileName);
+                    int* tempArray;
+                    int tempArraySize = 0;
+                    int value;
+
+                    if(file.is_open()){
+                        while(file >> value){
+                            int* tempArray2 = new int[tempArraySize + 1];//po kazdej odczytanej wartosci z pliku tworzymy nowa tablice
+                            for (int i = 0; i < tempArraySize; i++)//o 1 wieksza i dopisujemy nowa wartosc
+                                tempArray2[i] = tempArray[i];
+
+                            tempArray2[tempArraySize] = value;
+                            delete[] tempArray;
+                            tempArray = tempArray2;
+                            tempArraySize++;
+                        }
+                        delete[]array;
+                        array = tempArray;
+                        arraySize = tempArraySize;
+                        file.close();
+                    }else{
+                        cout << "Wystapil blad przy odczycie pliku\n";
+                        cerr << strerror(errno); //wyswietla blad odczytu pliku
+                    }
+
+                    break;
+                }
+                case 8:{
+                    cout << "Wybierz algorytm sortowania:\n";
+                    cout << "1 - Insertion Sort\n";
+                    cout << "2 - Heap Sort\n";
+                    cout << "3 - Shell Sort metoda Shella\n";
+                    cout << "4 - Shell Sort metoda Hibbarda\n";
+                    cout << "5 - Quick Sort ze skrajnym lewym pivotem\n";
+                    cout << "6 - Quick Sort ze skrajnym prawym pivotem\n";
+                    cout << "7 - Quick Sort ze srodkowym pivotem\n";
+                    cout << "8 - Quick Sort z losowym pivotem\n";
+                    int algChoice;
+                    cin >> algChoice;
+
+                    switch (algChoice) {
+                        case 1:{
+                            InsertionSortInt* insertionSortInt = new InsertionSortInt();
+                            arraySorted = insertionSortInt -> sortArray(array, arraySize);
+                            cout << insertionSortInt -> duration << endl;
+                            if(insertionSortInt -> isSorted(arraySorted,arraySize))
+                                cout << "Tablica zostala posortowana prawidlowo.\n";
+                            break;
+                        }
+                        case 2:{
+                            HeapSortInt* heapSortInt = new HeapSortInt();
+                            arraySorted = heapSortInt ->sortArray(array, arraySize);
+                            cout << heapSortInt -> duration << endl;
+                            if(heapSortInt -> isSorted(arraySorted,arraySize))
+                                cout << "Tablica zostala posortowana prawidlowo.\n";
+                            break;
+                        }
+                        case 3:{
+                            ShellSortInt* shellSortInt = new ShellSortInt();
+                            arraySorted = shellSortInt ->sortShell(array, arraySize);
+                            cout << shellSortInt -> duration << endl;
+                            if(shellSortInt -> isSorted(arraySorted,arraySize))
+                                cout << "Tablica zostala posortowana prawidlowo.\n";
+                            break;
+                        }
+                        case 4:{
+                            ShellSortInt* shellSortInt = new ShellSortInt();
+                            arraySorted = shellSortInt ->sortHibbard(array, arraySize);
+                            cout << shellSortInt -> duration << endl;
+                            if(shellSortInt -> isSorted(arraySorted,arraySize))
+                                cout << "Tablica zostala posortowana prawidlowo.\n";
+                            break;
+                        }
+
+                        case 5:{
+                            QuickSortInt* quickSortInt = new QuickSortInt();
+                            arraySorted = quickSortInt -> sort(array, arraySize, 0); //lewy pivot
+                            cout << quickSortInt -> duration << endl;
+                            if(quickSortInt -> isSorted(arraySorted,arraySize))
+                                cout << "Tablica zostala posortowana prawidlowo.\n";
+                            break;
+                        }
+                        case 6:{
+                            QuickSortInt* quickSortInt = new QuickSortInt();
+                            arraySorted = quickSortInt -> sort(array, arraySize, arraySize - 1); //prawy pivot
+                            cout << quickSortInt -> duration << endl;
+                            if(quickSortInt -> isSorted(arraySorted,arraySize))
+                                cout << "Tablica zostala posortowana prawidlowo.\n";
+                            break;
+                        }
+                        case 7:{
+                            QuickSortInt* quickSortInt = new QuickSortInt();
+                            arraySorted = quickSortInt -> sort(array, arraySize, arraySize / 2); //srodkowy pivot
+                            cout << quickSortInt -> duration << endl;
+                            if(quickSortInt -> isSorted(arraySorted,arraySize))
+                                cout << "Tablica zostala posortowana prawidlowo.\n";
+                            break;
+                        }
+                        case 8: {
+                            srand(time(nullptr));
+                            QuickSortInt* quickSortInt = new QuickSortInt();
+                            arraySorted = quickSortInt->sort(array, arraySize, rand() % arraySize); //losowy pivot
+                            cout << quickSortInt -> duration << endl;
+                            if(quickSortInt -> isSorted(arraySorted,arraySize))
+                                cout << "Tablica zostala posortowana prawidlowo.\n";
+                            break;
+                        }
+                        default:{
+                            cout << "Zle wybrano algorytm sortowania!!!\n";
+                        }
+                    }
+                    break;
+                }
+                case 9:{
+                    cout << "Tablica po posortowaniu:\n";
+                    SortAlgInt::printArray(arraySorted,arraySize);
+                    break;
+                }
+                case 10:{
+                    cout << "\nWybierz akcje:\n";
+                    cout << "1 - Wyswietl wczytana/wygenerowana tablice\n";
+                    cout << "2 - Wygeneruj losowa tablice o zadanym rozmiarze\n";
+                    cout << "3 - Wygeneruj tablice posortowana rosnaco\n";
+                    cout << "4 - Wygeneruj tablice posortowana malejaco\n";
+                    cout << "5 - Wygeneruj tablice posortowana w 33%\n";
+                    cout << "6 - Wygeneruj tablice posortowana w 66%\n";
+                    cout << "7 - Wczytaj dane tablicy z pliku txt\n";
+                    cout << "8 - Uruchom wybrany algorytm sortowania\n";
+                    cout << "9 - Wyswietl posortowana kopie tablicy\n";
+                    cout << "10 - Pokaz ponownie menu\n";
+                    cout << "11 - Uruchom analize wybranego algorytmu\n";
+                    cout << "12 - Wyjdz z programu\n\n";
+                    break;
+                }
+                case 11:{
+                    //zakres losowanych liczb 1 - 30000
+                    analysis();
+
+                    break;
+                }
+                case 12: {
+                    cout << "Zakonczono program.\n";
+                    return;
+                }
+                default: {
+                    cout << "Podano bledny argument!!!\n";
+                }
+            }
+        } while (choice != 12);
+
+    }else if(type == 2){
+        //
+    }else if(type == 3){
+        //
+    }
 }
