@@ -1,0 +1,10 @@
+# ninja log v5
+33	3620	7353505878308679	CMakeFiles/Projekt1.dir/IntAnalysis.cpp.obj	4ceef6c497005c46
+21	258	7353505844668129	CMakeFiles/Projekt1.dir/main.cpp.obj	957e9df9f0945fdd
+25	4088	7353505882982922	CMakeFiles/Projekt1.dir/MenuFunctions.cpp.obj	4f7c1a3f1df9ab5f
+8	2327	7353505865366926	CMakeFiles/Projekt1.dir/SortAlgInt.cpp.obj	83419e2510e624d
+42	2365	7353505865757283	CMakeFiles/Projekt1.dir/SortAlgFloat.cpp.obj	48901e4e32f78f08
+28	2855	7353505870651723	CMakeFiles/Projekt1.dir/DoubleAnalysis.cpp.obj	50e6ff2c575d879b
+37	2354	7353505865627164	CMakeFiles/Projekt1.dir/SortAlgDouble.cpp.obj	6bbc26920b7a7230
+5	616	7353509964037268	Projekt1.exe	1309acc5ad59ae86
+2	159	7353515777599580	build.ninja	a0271efc699972ac

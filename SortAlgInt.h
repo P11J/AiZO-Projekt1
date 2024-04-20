@@ -4,7 +4,7 @@
 
 using namespace std;
 
-class SortAlgInt {
+class SortAlgInt { //klasa rodzic dla algorytmow sortowania
     public:
         chrono::steady_clock::time_point startTime;
         chrono::steady_clock::time_point endTime;
@@ -14,6 +14,8 @@ class SortAlgInt {
         static void printArray(int* array, int arraySize);
         bool isSorted(int* array, int arraySize);
 };
+
+//ponizej znajduja sie klasy dziedziczace po SortAlgInt rozniace sie algorytmem sortowania i ew. funkcjami pomocniczymi
 
 class InsertionSortInt : public SortAlgInt{
     public:

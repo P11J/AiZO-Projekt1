@@ -1,34 +1,32 @@
-
-
 #include <chrono>
 #include <cmath> //dla pow()
 #include <iostream>
+#include <cstdlib>
+
 #include "SortAlgInt.h"
 
 
-int* SortAlgInt::generateRandArray(int arraySize, int minimum, int maximum){
+int* SortAlgInt::generateRandArray(int arraySize, int minimum, int maximum){ //funkcja generujaca tablice z losowymi danymi
     if(arraySize < 1 or minimum > maximum){
         throw invalid_argument("Podano bledny/e argument/y!!!\n");
     }
 
-    srand(time(nullptr));
-
     int* array = new int[arraySize];
 
     for(int i = 0; i < arraySize; i++){
-        array[i] = rand() % (maximum - minimum + 1) + minimum;
+        array[i] = rand() % (maximum - minimum + 1) + minimum; //losowanie liczby z podanego zakresu
     }
     return array;
 }
 
-void SortAlgInt::printArray(int* array, int arraySize){
+void SortAlgInt::printArray(int* array, int arraySize){ //wypisanie tablicy przed sortowaniem w konsoli
     for(int i = 0; i < arraySize; i++){
         cout << array[i] << " ";
     }
     cout<<endl<<endl;
 }
 
-bool SortAlgInt::isSorted(int* array, int arraySize){
+bool SortAlgInt::isSorted(int* array, int arraySize){ //funckcja sprawdzajaca czy tablica zostala poprawnie posortowana
     for(int i = 0; i < arraySize - 1; i++){
         if(array[i] > array[i + 1]){
             return false;
@@ -37,6 +35,7 @@ bool SortAlgInt::isSorted(int* array, int arraySize){
     return true;
 }
 
+//ponizej znajduja sie metody klas dziedziczacych po klasie SortAlgInt dla każdego z algorytmow sortowania
 
 int* InsertionSortInt::sortArray(int *array, int arraySize) {
     int *arrayToSort = new int[arraySize];
@@ -67,8 +66,7 @@ void HeapSortInt::heap_fix_down(int *array, int i, int arraySize) {
     j = 2 * i + 1; // j to lewy potomek i
 
     while (j < arraySize) {
-        if (j + 1 < arraySize &&
-            array[j] < array[j + 1]) // Sprawdza, czy prawy potomek istnieje i jest większy od lewego
+        if (j + 1 < arraySize && array[j] < array[j + 1]) // Sprawdza, czy prawy potomek istnieje i jest większy od lewego
             j = j + 1; // Przechodzi do prawego potomka, jeśli spełnia warunki
 
         if (temp >= array[j]) // Jeśli żaden z potomków nie jest większy, przerwij
@@ -189,15 +187,15 @@ void QuickSortInt::quickSort(int *array, int left, int right) {
 
 int QuickSortInt::partition(int *array, int left, int right, int pivotIndex) {
     int pivotValue = array[pivotIndex];
-    std::swap(array[pivotIndex], array[right]); // Przesunięcie pivota na koniec
+    swap(array[pivotIndex], array[right]); // Przesunięcie pivota na koniec
     int storeIndex = left;
     for (int i = left; i < right; i++) {
         if (array[i] < pivotValue) {
-            std::swap(array[i], array[storeIndex]);
+            swap(array[i], array[storeIndex]);
             storeIndex++;
         }
     }
-    std::swap(array[storeIndex], array[right]); // Przesunięcie pivota na jego docelową pozycję
+    swap(array[storeIndex], array[right]); // Przesunięcie pivota na jego docelową pozycję
     return storeIndex;
 }
 
