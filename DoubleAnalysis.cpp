@@ -30,7 +30,7 @@ void doubleAnalysis(){
     InsertionSortDouble* insertionSortDouble = new InsertionSortDouble();
 
     double durationSum = 0;
-    const double durationCounter = 5.0;
+    const double durationCounter = 50.0;
     double durationToAnalyse;
 
 

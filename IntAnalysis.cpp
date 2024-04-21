@@ -42,7 +42,7 @@ void intAnalysis(){
             InsertionSortInt* insertionSortInt = new InsertionSortInt();
 
             double durationSum = 0;
-            const double durationCounter = 5.0;
+            const double durationCounter = 50.0;
             double durationToAnalyse;
 
 
@@ -183,7 +183,7 @@ void intAnalysis(){
             HeapSortInt* heapSortInt = new HeapSortInt();
 
             double durationSum = 0;
-            const double durationCounter = 5.0;
+            const double durationCounter = 50.0;
             double durationToAnalyse;
 
 
@@ -323,7 +323,7 @@ void intAnalysis(){
             ShellSortInt* shellSortInt = new ShellSortInt();
 
             double durationSum = 0;
-            const double durationCounter = 5.0;
+            const double durationCounter = 50.0;
             double durationToAnalyse;
 
 
@@ -463,7 +463,7 @@ void intAnalysis(){
             ShellSortInt* shellSortInt = new ShellSortInt();
 
             double durationSum = 0;
-            const double durationCounter = 5.0;
+            const double durationCounter = 50.0;
             double durationToAnalyse;
 
 
@@ -603,7 +603,7 @@ void intAnalysis(){
             QuickSortInt* quickSortInt = new QuickSortInt();
 
             double durationSum = 0;
-            const double durationCounter = 5.0;
+            const double durationCounter = 50.0;
             double durationToAnalyse;
 
 
@@ -743,7 +743,7 @@ void intAnalysis(){
             QuickSortInt* quickSortInt = new QuickSortInt();
 
             double durationSum = 0;
-            const double durationCounter = 5.0;
+            const double durationCounter = 50.0;
             double durationToAnalyse;
 
 
@@ -883,7 +883,7 @@ void intAnalysis(){
             QuickSortInt* quickSortInt = new QuickSortInt();
 
             double durationSum = 0;
-            const double durationCounter = 5.0;
+            const double durationCounter = 50.0;
             double durationToAnalyse;
 
 
@@ -1023,7 +1023,7 @@ void intAnalysis(){
             QuickSortInt* quickSortInt = new QuickSortInt();
 
             double durationSum = 0;
-            const double durationCounter = 5.0;
+            const double durationCounter = 50.0;
             double durationToAnalyse;
 
 
