@@ -155,62 +155,62 @@ int* ShellSortInt::sortHibbard(int *array, int arraySize) {
         --k; // Zmniejszenie k na końcu pętli while
     }
     this->endTime = chrono::steady_clock::now();
-    this->duration = chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime);
+    this->duration = chrono::duration_cast<chrono::milliseconds>(endTime - startTime);
 
     return arrayToSort;
 }
 
 int QuickSortInt::choosePivotIndex(int left, int right, int strategy) {
     switch(strategy) {
-        case 0: // Leftmost
+        case 0: // skrajny lewy
             return left;
-        case 1: // Rightmost
+        case 1: // skrajny prawy
             return right;
-        case 2: // Middle
+        case 2: // srodkowy
             return left + (right - left) / 2;
-        case 3: // Random
+        case 3: // losowy
             return left + rand() % (right - left + 1);
         default:
-            return left + (right - left) / 2; // Default to middle if invalid strategy
+            return left + (right - left) / 2; // domyslnie srodek
     }
 }
 
-// Function to partition the array around the pivot
+//
 int QuickSortInt::partition(int *array, int left, int right, int strategy) {
     int pivotIndex = choosePivotIndex(left, right, strategy);
     int pivotValue = array[pivotIndex];
-    std::swap(array[pivotIndex], array[right]); // Move pivot to end
+    swap(array[pivotIndex], array[right]); // zamiana pivota na koniec
     int storeIndex = left;
     for (int i = left; i < right; i++) {
         if (array[i] < pivotValue) {
-            std::swap(array[i], array[storeIndex]);
+            swap(array[i], array[storeIndex]);
             storeIndex++;
         }
     }
-    std::swap(array[storeIndex], array[right]); // Move pivot to its final place
+    swap(array[storeIndex], array[right]); // zamiana pivota na jego miejsce
     return storeIndex;
 }
 
-// Recursive quicksort function
+// quicksort rekurencyjnie
 void QuickSortInt::quickSort(int *array, int left, int right, int strategy) {
     if (left < right) {
         int pivotIndex = partition(array, left, right, strategy);
-        quickSort(array, left, pivotIndex - 1, strategy); // Sort left subarray
-        quickSort(array, pivotIndex + 1, right, strategy); // Sort right subarray
+        quickSort(array, left, pivotIndex - 1, strategy); // sortowanie lewej czesci
+        quickSort(array, pivotIndex + 1, right, strategy); // sortowanie prawej czesci
     }
 }
 
-// Public sort function that can specify pivot strategy
+// funkcja sortowania quicksort z wyborem strategii wyboru pivota
 int* QuickSortInt::sort(int* array, int arraySize, int strategy) {
     int* arraySorted = new int[arraySize];
     for (int i = 0; i < arraySize; i++) {
         arraySorted[i] = array[i];
     }
 
-    startTime = std::chrono::steady_clock::now();
-    quickSort(arraySorted, 0, arraySize - 1, strategy); // Start quicksort with the chosen strategy
-    endTime = std::chrono::steady_clock::now();
-    duration = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime);
+    startTime = chrono::steady_clock::now();
+    quickSort(arraySorted, 0, arraySize - 1, strategy);
+    endTime = chrono::steady_clock::now();
+    duration = chrono::duration_cast<chrono::milliseconds>(endTime - startTime);
 
     return arraySorted;
 }

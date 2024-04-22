@@ -43,11 +43,12 @@ public:
 
 class QuickSortDouble : public SortAlgDouble {
 public:
-    double* sort(double* array, int arraySize, int pivotIndex);
+    double* sort(double* array, int arraySize, int strategy);
 
 private:
-    void quickSort(double* array, int left, int right);
-    int partition(double* array, int left, int right, int pivotIndex);
+    int choosePivotIndex(int left, int right, int strategy);
+    void quickSort(double *array, int left, int right, int strategy);
+    int partition(double *array, int left, int right, int strategy);
 };
 
 #endif //PROJEKT1_SORTALGDOUBLE_H

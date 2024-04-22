@@ -43,11 +43,12 @@ public:
 
 class QuickSortFloat : public SortAlgFloat {
 public:
-    float* sort(float* array, int arraySize, int pivotIndex);
+    float* sort(float* array, int arraySize, int strategy);
 
 private:
-    void quickSort(float* array, int left, int right);
-    int partition(float* array, int left, int right, int pivotIndex);
+    int choosePivotIndex(int left, int right, int strategy);
+    void quickSort(float* array, int left, int right, int strategy);
+    int partition(float* array, int left, int right, int strategy);
 };
 
 

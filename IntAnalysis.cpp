@@ -603,7 +603,7 @@ void intAnalysis(){
             QuickSortInt* quickSortInt = new QuickSortInt();
 
             double durationSum = 0;
-            const double durationCounter = 50.0;
+            const double durationCounter = 5.0;
             double durationToAnalyse;
 
 
@@ -743,16 +743,16 @@ void intAnalysis(){
             QuickSortInt* quickSortInt = new QuickSortInt();
 
             double durationSum = 0;
-            const double durationCounter = 50.0;
+            const double durationCounter = 5.0;
             double durationToAnalyse;
 
 
             //dla calkowicie losowej tablicy
             for(int sizeMultiplier = 1; sizeMultiplier <= 64; sizeMultiplier *= 2){
-                arrayToAnalyseSize = 40000 * sizeMultiplier;
+                arrayToAnalyseSize = 20000 * sizeMultiplier;
                 for(int i = 0; i < durationCounter; i++){
                     arrayToAnalyse = quickSortInt -> generateRandArray(arrayToAnalyseSize, minimumAnalyse, maximumAnalyse);
-                    arrayToAnalyseSorted = quickSortInt -> sort(arrayToAnalyse, arrayToAnalyseSize,arrayToAnalyseSize - 1);
+                    arrayToAnalyseSorted = quickSortInt -> sort(arrayToAnalyse, arrayToAnalyseSize,1);
                     durationSum += quickSortInt -> duration.count();
                 }
                 cout << "Aktualny rozmiar tablicy to: " << arrayToAnalyseSize << endl;
@@ -772,11 +772,11 @@ void intAnalysis(){
 
             //dla tablicy pos. rosnaco
             for(int sizeMultiplier = 1; sizeMultiplier <= 64; sizeMultiplier *= 2){
-                arrayToAnalyseSize = 40000 * sizeMultiplier;
+                arrayToAnalyseSize = 20000 * sizeMultiplier;
                 for(int i = 0; i < durationCounter; i++){
                     arrayToAnalyse = quickSortInt -> generateRandArray(arrayToAnalyseSize, minimumAnalyse, maximumAnalyse);
                     sort(arrayToAnalyse, arrayToAnalyse + arrayToAnalyseSize);
-                    arrayToAnalyseSorted = quickSortInt -> sort(arrayToAnalyse, arrayToAnalyseSize,arrayToAnalyseSize - 1);
+                    arrayToAnalyseSorted = quickSortInt -> sort(arrayToAnalyse, arrayToAnalyseSize,1);
                     durationSum += quickSortInt -> duration.count();
                 }
                 cout << "Aktualny rozmiar tablicy to: " << arrayToAnalyseSize << endl;
@@ -796,11 +796,11 @@ void intAnalysis(){
 
             //dla tablicy pos. malejo
             for(int sizeMultiplier = 1; sizeMultiplier <= 64; sizeMultiplier *= 2){
-                arrayToAnalyseSize = 40000 * sizeMultiplier;
+                arrayToAnalyseSize = 20000 * sizeMultiplier;
                 for(int i = 0; i < durationCounter; i++){
                     arrayToAnalyse = quickSortInt -> generateRandArray(arrayToAnalyseSize, minimumAnalyse, maximumAnalyse);
                     sort(arrayToAnalyse,arrayToAnalyse + arrayToAnalyseSize, compare);
-                    arrayToAnalyseSorted = quickSortInt -> sort(arrayToAnalyse, arrayToAnalyseSize,arrayToAnalyseSize - 1);
+                    arrayToAnalyseSorted = quickSortInt -> sort(arrayToAnalyse, arrayToAnalyseSize,1);
                     durationSum += quickSortInt -> duration.count();
                 }
                 cout << "Aktualny rozmiar tablicy to: " << arrayToAnalyseSize << endl;
@@ -820,11 +820,11 @@ void intAnalysis(){
 
             //dla tablicy pos. w 33%
             for(int sizeMultiplier = 1; sizeMultiplier <= 64; sizeMultiplier *= 2){
-                arrayToAnalyseSize = 40000 * sizeMultiplier;
+                arrayToAnalyseSize = 20000 * sizeMultiplier;
                 for(int i = 0; i < durationCounter; i++){
                     arrayToAnalyse = quickSortInt -> generateRandArray(arrayToAnalyseSize, minimumAnalyse, maximumAnalyse);
                     sort(arrayToAnalyse, arrayToAnalyse + arrayToAnalyseSize / 3);
-                    arrayToAnalyseSorted = quickSortInt -> sort(arrayToAnalyse, arrayToAnalyseSize,arrayToAnalyseSize - 1);
+                    arrayToAnalyseSorted = quickSortInt -> sort(arrayToAnalyse, arrayToAnalyseSize,1);
                     durationSum += quickSortInt -> duration.count();
                 }
                 cout << "Aktualny rozmiar tablicy to: " << arrayToAnalyseSize << endl;
@@ -844,11 +844,11 @@ void intAnalysis(){
 
             //dla tablicy pos. w 66%
             for(int sizeMultiplier = 1; sizeMultiplier <= 64; sizeMultiplier *= 2){
-                arrayToAnalyseSize = 40000 * sizeMultiplier;
+                arrayToAnalyseSize = 20000 * sizeMultiplier;
                 for(int i = 0; i < durationCounter; i++){
                     arrayToAnalyse = quickSortInt -> generateRandArray(arrayToAnalyseSize, minimumAnalyse, maximumAnalyse);
                     sort(arrayToAnalyse, arrayToAnalyse + (arrayToAnalyseSize / 3) * 2);
-                    arrayToAnalyseSorted = quickSortInt -> sort(arrayToAnalyse, arrayToAnalyseSize,arrayToAnalyseSize - 1);
+                    arrayToAnalyseSorted = quickSortInt -> sort(arrayToAnalyse, arrayToAnalyseSize,1);
                     durationSum += quickSortInt -> duration.count();
                 }
                 cout << "Aktualny rozmiar tablicy to: " << arrayToAnalyseSize << endl;
@@ -883,16 +883,16 @@ void intAnalysis(){
             QuickSortInt* quickSortInt = new QuickSortInt();
 
             double durationSum = 0;
-            const double durationCounter = 50.0;
+            const double durationCounter = 5.0;
             double durationToAnalyse;
 
 
             //dla calkowicie losowej tablicy
             for(int sizeMultiplier = 1; sizeMultiplier <= 64; sizeMultiplier *= 2){
-                arrayToAnalyseSize = 40000 * sizeMultiplier;
+                arrayToAnalyseSize = 160000 * sizeMultiplier;
                 for(int i = 0; i < durationCounter; i++){
                     arrayToAnalyse = quickSortInt -> generateRandArray(arrayToAnalyseSize, minimumAnalyse, maximumAnalyse);
-                    arrayToAnalyseSorted = quickSortInt -> sort(arrayToAnalyse, arrayToAnalyseSize,arrayToAnalyseSize/2);
+                    arrayToAnalyseSorted = quickSortInt -> sort(arrayToAnalyse, arrayToAnalyseSize,2);
                     durationSum += quickSortInt -> duration.count();
                 }
                 cout << "Aktualny rozmiar tablicy to: " << arrayToAnalyseSize << endl;
@@ -912,11 +912,11 @@ void intAnalysis(){
 
             //dla tablicy pos. rosnaco
             for(int sizeMultiplier = 1; sizeMultiplier <= 64; sizeMultiplier *= 2){
-                arrayToAnalyseSize = 40000 * sizeMultiplier;
+                arrayToAnalyseSize = 160000 * sizeMultiplier;
                 for(int i = 0; i < durationCounter; i++){
                     arrayToAnalyse = quickSortInt -> generateRandArray(arrayToAnalyseSize, minimumAnalyse, maximumAnalyse);
                     sort(arrayToAnalyse, arrayToAnalyse + arrayToAnalyseSize);
-                    arrayToAnalyseSorted = quickSortInt -> sort(arrayToAnalyse, arrayToAnalyseSize,arrayToAnalyseSize/2);
+                    arrayToAnalyseSorted = quickSortInt -> sort(arrayToAnalyse, arrayToAnalyseSize,2);
                     durationSum += quickSortInt -> duration.count();
                 }
                 cout << "Aktualny rozmiar tablicy to: " << arrayToAnalyseSize << endl;
@@ -936,11 +936,11 @@ void intAnalysis(){
 
             //dla tablicy pos. malejo
             for(int sizeMultiplier = 1; sizeMultiplier <= 64; sizeMultiplier *= 2){
-                arrayToAnalyseSize = 40000 * sizeMultiplier;
+                arrayToAnalyseSize = 160000 * sizeMultiplier;
                 for(int i = 0; i < durationCounter; i++){
                     arrayToAnalyse = quickSortInt -> generateRandArray(arrayToAnalyseSize, minimumAnalyse, maximumAnalyse);
                     sort(arrayToAnalyse,arrayToAnalyse + arrayToAnalyseSize, compare);
-                    arrayToAnalyseSorted = quickSortInt -> sort(arrayToAnalyse, arrayToAnalyseSize,arrayToAnalyseSize/2);
+                    arrayToAnalyseSorted = quickSortInt -> sort(arrayToAnalyse, arrayToAnalyseSize,2);
                     durationSum += quickSortInt -> duration.count();
                 }
                 cout << "Aktualny rozmiar tablicy to: " << arrayToAnalyseSize << endl;
@@ -960,11 +960,11 @@ void intAnalysis(){
 
             //dla tablicy pos. w 33%
             for(int sizeMultiplier = 1; sizeMultiplier <= 64; sizeMultiplier *= 2){
-                arrayToAnalyseSize = 40000 * sizeMultiplier;
+                arrayToAnalyseSize = 160000 * sizeMultiplier;
                 for(int i = 0; i < durationCounter; i++){
                     arrayToAnalyse = quickSortInt -> generateRandArray(arrayToAnalyseSize, minimumAnalyse, maximumAnalyse);
                     sort(arrayToAnalyse, arrayToAnalyse + arrayToAnalyseSize / 3);
-                    arrayToAnalyseSorted = quickSortInt -> sort(arrayToAnalyse, arrayToAnalyseSize,arrayToAnalyseSize/2);
+                    arrayToAnalyseSorted = quickSortInt -> sort(arrayToAnalyse, arrayToAnalyseSize,2);
                     durationSum += quickSortInt -> duration.count();
                 }
                 cout << "Aktualny rozmiar tablicy to: " << arrayToAnalyseSize << endl;
@@ -984,11 +984,11 @@ void intAnalysis(){
 
             //dla tablicy pos. w 66%
             for(int sizeMultiplier = 1; sizeMultiplier <= 64; sizeMultiplier *= 2){
-                arrayToAnalyseSize = 40000 * sizeMultiplier;
+                arrayToAnalyseSize = 160000 * sizeMultiplier;
                 for(int i = 0; i < durationCounter; i++){
                     arrayToAnalyse = quickSortInt -> generateRandArray(arrayToAnalyseSize, minimumAnalyse, maximumAnalyse);
                     sort(arrayToAnalyse, arrayToAnalyse + (arrayToAnalyseSize / 3) * 2);
-                    arrayToAnalyseSorted = quickSortInt -> sort(arrayToAnalyse, arrayToAnalyseSize,arrayToAnalyseSize/2);
+                    arrayToAnalyseSorted = quickSortInt -> sort(arrayToAnalyse, arrayToAnalyseSize,2);
                     durationSum += quickSortInt -> duration.count();
                 }
                 cout << "Aktualny rozmiar tablicy to: " << arrayToAnalyseSize << endl;
@@ -1023,16 +1023,16 @@ void intAnalysis(){
             QuickSortInt* quickSortInt = new QuickSortInt();
 
             double durationSum = 0;
-            const double durationCounter = 50.0;
+            const double durationCounter = 5.0;
             double durationToAnalyse;
 
 
             //dla calkowicie losowej tablicy
             for(int sizeMultiplier = 1; sizeMultiplier <= 64; sizeMultiplier *= 2){
-                arrayToAnalyseSize = 40000 * sizeMultiplier;
+                arrayToAnalyseSize = 160000 * sizeMultiplier;
                 for(int i = 0; i < durationCounter; i++){
                     arrayToAnalyse = quickSortInt -> generateRandArray(arrayToAnalyseSize, minimumAnalyse, maximumAnalyse);
-                    arrayToAnalyseSorted = quickSortInt -> sort(arrayToAnalyse, arrayToAnalyseSize,rand() % arrayToAnalyseSize);
+                    arrayToAnalyseSorted = quickSortInt -> sort(arrayToAnalyse, arrayToAnalyseSize,3);
                     durationSum += quickSortInt -> duration.count();
                 }
                 cout << "Aktualny rozmiar tablicy to: " << arrayToAnalyseSize << endl;
@@ -1052,11 +1052,11 @@ void intAnalysis(){
 
             //dla tablicy pos. rosnaco
             for(int sizeMultiplier = 1; sizeMultiplier <= 64; sizeMultiplier *= 2){
-                arrayToAnalyseSize = 40000 * sizeMultiplier;
+                arrayToAnalyseSize = 160000 * sizeMultiplier;
                 for(int i = 0; i < durationCounter; i++){
                     arrayToAnalyse = quickSortInt -> generateRandArray(arrayToAnalyseSize, minimumAnalyse, maximumAnalyse);
                     sort(arrayToAnalyse, arrayToAnalyse + arrayToAnalyseSize);
-                    arrayToAnalyseSorted = quickSortInt -> sort(arrayToAnalyse, arrayToAnalyseSize,rand() % arrayToAnalyseSize);
+                    arrayToAnalyseSorted = quickSortInt -> sort(arrayToAnalyse, arrayToAnalyseSize,3);
                     durationSum += quickSortInt -> duration.count();
                 }
                 cout << "Aktualny rozmiar tablicy to: " << arrayToAnalyseSize << endl;
@@ -1076,11 +1076,11 @@ void intAnalysis(){
 
             //dla tablicy pos. malejo
             for(int sizeMultiplier = 1; sizeMultiplier <= 64; sizeMultiplier *= 2){
-                arrayToAnalyseSize = 40000 * sizeMultiplier;
+                arrayToAnalyseSize = 160000 * sizeMultiplier;
                 for(int i = 0; i < durationCounter; i++){
                     arrayToAnalyse = quickSortInt -> generateRandArray(arrayToAnalyseSize, minimumAnalyse, maximumAnalyse);
                     sort(arrayToAnalyse,arrayToAnalyse + arrayToAnalyseSize, compare);
-                    arrayToAnalyseSorted = quickSortInt -> sort(arrayToAnalyse, arrayToAnalyseSize,rand() % arrayToAnalyseSize);
+                    arrayToAnalyseSorted = quickSortInt -> sort(arrayToAnalyse, arrayToAnalyseSize,3);
                     durationSum += quickSortInt -> duration.count();
                 }
                 cout << "Aktualny rozmiar tablicy to: " << arrayToAnalyseSize << endl;
@@ -1100,11 +1100,11 @@ void intAnalysis(){
 
             //dla tablicy pos. w 33%
             for(int sizeMultiplier = 1; sizeMultiplier <= 64; sizeMultiplier *= 2){
-                arrayToAnalyseSize = 40000 * sizeMultiplier;
+                arrayToAnalyseSize = 160000 * sizeMultiplier;
                 for(int i = 0; i < durationCounter; i++){
                     arrayToAnalyse = quickSortInt -> generateRandArray(arrayToAnalyseSize, minimumAnalyse, maximumAnalyse);
                     sort(arrayToAnalyse, arrayToAnalyse + arrayToAnalyseSize / 3);
-                    arrayToAnalyseSorted = quickSortInt -> sort(arrayToAnalyse, arrayToAnalyseSize,rand() % arrayToAnalyseSize);
+                    arrayToAnalyseSorted = quickSortInt -> sort(arrayToAnalyse, arrayToAnalyseSize,3);
                     durationSum += quickSortInt -> duration.count();
                 }
                 cout << "Aktualny rozmiar tablicy to: " << arrayToAnalyseSize << endl;
@@ -1124,11 +1124,11 @@ void intAnalysis(){
 
             //dla tablicy pos. w 66%
             for(int sizeMultiplier = 1; sizeMultiplier <= 64; sizeMultiplier *= 2){
-                arrayToAnalyseSize = 40000 * sizeMultiplier;
+                arrayToAnalyseSize = 160000 * sizeMultiplier;
                 for(int i = 0; i < durationCounter; i++){
                     arrayToAnalyse = quickSortInt -> generateRandArray(arrayToAnalyseSize, minimumAnalyse, maximumAnalyse);
                     sort(arrayToAnalyse, arrayToAnalyse + (arrayToAnalyseSize / 3) * 2);
-                    arrayToAnalyseSorted = quickSortInt -> sort(arrayToAnalyse, arrayToAnalyseSize,rand() % arrayToAnalyseSize);
+                    arrayToAnalyseSorted = quickSortInt -> sort(arrayToAnalyse, arrayToAnalyseSize,3);
                     durationSum += quickSortInt -> duration.count();
                 }
                 cout << "Aktualny rozmiar tablicy to: " << arrayToAnalyseSize << endl;

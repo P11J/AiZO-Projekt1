@@ -132,12 +132,14 @@ void intMenu2(int choice){ //menu 2 poziomu dla typu integer
                 int* tempArray = nullptr;
                 int tempArraySize = 0;
                 int value;
+                int numberOfValues = 0;
 
                 if(file.is_open()){
-                    while(file >> value){
+                    file >> numberOfValues; //w pierwszym wierszu podana jest liczba danych do wczytania
+                    for(int i = 0; i < numberOfValues; i++){
                         int* tempArray2 = new int[tempArraySize + 1]; //po kazdej odczytanej wartosci z pliku tworzymy nowa tablice
-                        for (int i = 0; i < tempArraySize; i++) //o 1 wieksza i dopisujemy nowa wartosc
-                            tempArray2[i] = tempArray[i];
+                        for (int j = 0; j < tempArraySize; j++) //o 1 wieksza i dopisujemy nowa wartosc
+                            tempArray2[j] = tempArray[j];
 
                         tempArray2[tempArraySize] = value;
                         delete[] tempArray;
@@ -416,12 +418,14 @@ void floatMenu2(int choice){ //menu 2. poziomu dla typu float
                 float* tempArray = nullptr;
                 int tempArraySize = 0;
                 float value;
+                int numberOfValues = 0;
 
                 if(file.is_open()){
-                    while(file >> value){
+                    file >> numberOfValues;
+                    for(int i = 0; i < numberOfValues; i++){
                         float* tempArray2 = new float [tempArraySize + 1]; //po kazdej odczytanej wartosci z pliku tworzymy nowa tablice
-                        for (int i = 0; i < tempArraySize; i++) //o 1 wieksza i dopisujemy nowa wartosc
-                            tempArray2[i] = tempArray[i];
+                        for (int j = 0; j < tempArraySize; j++) //o 1 wieksza i dopisujemy nowa wartosc
+                            tempArray2[j] = tempArray[j];
 
                         tempArray2[tempArraySize] = value;
                         delete[] tempArray;
@@ -496,7 +500,7 @@ void floatMenu2(int choice){ //menu 2. poziomu dla typu float
                     }
                     case 6:{
                         QuickSortFloat* quickSortFloat = new QuickSortFloat();
-                        arraySorted = quickSortFloat -> sort(array, arraySize, arraySize - 1); //prawy pivot
+                        arraySorted = quickSortFloat -> sort(array, arraySize, 1); //prawy pivot
                         cout << quickSortFloat -> duration << endl;
                         if(quickSortFloat -> isSorted(arraySorted,arraySize))
                             cout << "Tablica zostala posortowana prawidlowo.\n";
@@ -504,7 +508,7 @@ void floatMenu2(int choice){ //menu 2. poziomu dla typu float
                     }
                     case 7:{
                         QuickSortFloat* quickSortFloat = new QuickSortFloat();
-                        arraySorted = quickSortFloat -> sort(array, arraySize, arraySize / 2); //srodkowy pivot
+                        arraySorted = quickSortFloat -> sort(array, arraySize, 2); //srodkowy pivot
                         cout << quickSortFloat-> duration << endl;
                         if(quickSortFloat -> isSorted(arraySorted,arraySize))
                             cout << "Tablica zostala posortowana prawidlowo.\n";
@@ -513,7 +517,7 @@ void floatMenu2(int choice){ //menu 2. poziomu dla typu float
                     case 8: {
                         srand(time(nullptr));
                         QuickSortFloat* quickSortFloat = new QuickSortFloat();
-                        arraySorted = quickSortFloat->sort(array, arraySize, rand() % arraySize); //losowy pivot
+                        arraySorted = quickSortFloat->sort(array, arraySize, 3); //losowy pivot
                         cout << quickSortFloat -> duration << endl;
                         if(quickSortFloat -> isSorted(arraySorted,arraySize))
                             cout << "Tablica zostala posortowana prawidlowo.\n";
@@ -683,12 +687,14 @@ void doubleMenu2(int choice){ //menu 2. poziomu dla typu double
                 double* tempArray = nullptr;
                 int tempArraySize = 0;
                 double value;
+                int numberOfValues = 0;
 
                 if(file.is_open()){
-                    while(file >> value){
+                    file >> numberOfValues;
+                    for(int i = 0; i < numberOfValues; i++){
                         double* tempArray2 = new double [tempArraySize + 1]; //po kazdej odczytanej wartosci z pliku tworzymy nowa tablice
-                        for (int i = 0; i < tempArraySize; i++) //o 1 wieksza i dopisujemy nowa wartosc
-                            tempArray2[i] = tempArray[i];
+                        for (int j = 0; j< tempArraySize; j++) //o 1 wieksza i dopisujemy nowa wartosc
+                            tempArray2[j] = tempArray[j];
 
                         tempArray2[tempArraySize] = value;
                         delete[] tempArray;
