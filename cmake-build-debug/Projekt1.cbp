@@ -82,6 +82,36 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="C:/Users/HP/CLionProjects/AiZO-Projekt1/DoubleAnalysis.cpp">
+			<Option target="Projekt1"/>
+		</Unit>
+		<Unit filename="C:/Users/HP/CLionProjects/AiZO-Projekt1/DoubleAnalysis.h">
+			<Option target="Projekt1"/>
+		</Unit>
+		<Unit filename="C:/Users/HP/CLionProjects/AiZO-Projekt1/IntAnalysis.cpp">
+			<Option target="Projekt1"/>
+		</Unit>
+		<Unit filename="C:/Users/HP/CLionProjects/AiZO-Projekt1/IntAnalysis.h">
+			<Option target="Projekt1"/>
+		</Unit>
+		<Unit filename="C:/Users/HP/CLionProjects/AiZO-Projekt1/MenuFunctions.cpp">
+			<Option target="Projekt1"/>
+		</Unit>
+		<Unit filename="C:/Users/HP/CLionProjects/AiZO-Projekt1/MenuFunctions.h">
+			<Option target="Projekt1"/>
+		</Unit>
+		<Unit filename="C:/Users/HP/CLionProjects/AiZO-Projekt1/SortAlgDouble.cpp">
+			<Option target="Projekt1"/>
+		</Unit>
+		<Unit filename="C:/Users/HP/CLionProjects/AiZO-Projekt1/SortAlgDouble.h">
+			<Option target="Projekt1"/>
+		</Unit>
+		<Unit filename="C:/Users/HP/CLionProjects/AiZO-Projekt1/SortAlgFloat.cpp">
+			<Option target="Projekt1"/>
+		</Unit>
+		<Unit filename="C:/Users/HP/CLionProjects/AiZO-Projekt1/SortAlgFloat.h">
+			<Option target="Projekt1"/>
+		</Unit>
 		<Unit filename="C:/Users/HP/CLionProjects/AiZO-Projekt1/SortAlgInt.cpp">
 			<Option target="Projekt1"/>
 		</Unit>

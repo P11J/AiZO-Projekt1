@@ -39,13 +39,18 @@ public:
     int* sortHibbard(int* array, int arraySize);
 };
 
-class QuickSortInt : public SortAlgInt {
-public:
-    int* sort(int* array, int arraySize, int pivotIndex);
-
+class QuickSortInt : public SortAlgInt{
 private:
-    void quickSort(int *array, int left, int right);
-    int partition(int *array, int left, int right, int pivotIndex);
+
+
+    int choosePivotIndex(int left, int right, int strategy);
+    int partition(int *array, int left, int right, int strategy);
+    void quickSort(int *array, int left, int right, int strategy);
+
+public:
+    chrono::steady_clock::time_point startTime, endTime;
+    chrono::milliseconds duration;
+    int* sort(int* array, int arraySize, int strategy);
 };
 
 #endif //PROJEKT1_SORTALGINT_H

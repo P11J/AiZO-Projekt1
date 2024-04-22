@@ -175,6 +175,8 @@ void intMenu2(int choice){ //menu 2 poziomu dla typu integer
                         cout << insertionSortInt -> duration << endl;
                         if(insertionSortInt -> isSorted(arraySorted,arraySize))
                             cout << "Tablica zostala posortowana prawidlowo.\n";
+                        else
+                            cout << "Tablica nie zostala posortowana prawidlowo.\n";
                         break;
                     }
                     case 2:{
@@ -183,6 +185,8 @@ void intMenu2(int choice){ //menu 2 poziomu dla typu integer
                         cout << heapSortInt -> duration << endl;
                         if(heapSortInt -> isSorted(arraySorted,arraySize))
                             cout << "Tablica zostala posortowana prawidlowo.\n";
+                        else
+                            cout << "Tablica nie zostala posortowana prawidlowo.\n";
                         break;
                     }
                     case 3:{
@@ -191,6 +195,8 @@ void intMenu2(int choice){ //menu 2 poziomu dla typu integer
                         cout << shellSortInt -> duration << endl;
                         if(shellSortInt -> isSorted(arraySorted,arraySize))
                             cout << "Tablica zostala posortowana prawidlowo.\n";
+                        else
+                            cout << "Tablica nie zostala posortowana prawidlowo.\n";
                         break;
                     }
                     case 4:{
@@ -199,6 +205,8 @@ void intMenu2(int choice){ //menu 2 poziomu dla typu integer
                         cout << shellSortInt -> duration << endl;
                         if(shellSortInt -> isSorted(arraySorted,arraySize))
                             cout << "Tablica zostala posortowana prawidlowo.\n";
+                        else
+                            cout << "Tablica nie zostala posortowana prawidlowo.\n";
                         break;
                     }
 
@@ -208,31 +216,39 @@ void intMenu2(int choice){ //menu 2 poziomu dla typu integer
                         cout << quickSortInt -> duration << endl;
                         if(quickSortInt -> isSorted(arraySorted,arraySize))
                             cout << "Tablica zostala posortowana prawidlowo.\n";
+                        else
+                            cout << "Tablica nie zostala posortowana prawidlowo.\n";
                         break;
                     }
                     case 6:{
                         QuickSortInt* quickSortInt = new QuickSortInt();
-                        arraySorted = quickSortInt -> sort(array, arraySize, arraySize - 1); //prawy pivot
+                        arraySorted = quickSortInt -> sort(array, arraySize, 1); //prawy pivot
                         cout << quickSortInt -> duration << endl;
                         if(quickSortInt -> isSorted(arraySorted,arraySize))
                             cout << "Tablica zostala posortowana prawidlowo.\n";
+                        else
+                            cout << "Tablica nie zostala posortowana prawidlowo.\n";
                         break;
                     }
                     case 7:{
                         QuickSortInt* quickSortInt = new QuickSortInt();
-                        arraySorted = quickSortInt -> sort(array, arraySize, arraySize / 2); //srodkowy pivot
+                        arraySorted = quickSortInt -> sort(array, arraySize, 2); //srodkowy pivot
                         cout << quickSortInt -> duration << endl;
                         if(quickSortInt -> isSorted(arraySorted,arraySize))
                             cout << "Tablica zostala posortowana prawidlowo.\n";
+                        else
+                            cout << "Tablica nie zostala posortowana prawidlowo.\n";
                         break;
                     }
                     case 8: {
                         srand(time(nullptr));
                         QuickSortInt* quickSortInt = new QuickSortInt();
-                        arraySorted = quickSortInt->sort(array, arraySize, rand() % arraySize); //losowy pivot
+                        arraySorted = quickSortInt->sort(array, arraySize, 3); //losowy pivot
                         cout << quickSortInt -> duration << endl;
                         if(quickSortInt -> isSorted(arraySorted,arraySize))
                             cout << "Tablica zostala posortowana prawidlowo.\n";
+                        else
+                            cout << "Tablica nie zostala posortowana prawidlowo.\n";
                         break;
                     }
                     default:{

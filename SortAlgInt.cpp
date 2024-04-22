@@ -160,42 +160,58 @@ int* ShellSortInt::sortHibbard(int *array, int arraySize) {
     return arrayToSort;
 }
 
+int QuickSortInt::choosePivotIndex(int left, int right, int strategy) {
+    switch(strategy) {
+        case 0: // Leftmost
+            return left;
+        case 1: // Rightmost
+            return right;
+        case 2: // Middle
+            return left + (right - left) / 2;
+        case 3: // Random
+            return left + rand() % (right - left + 1);
+        default:
+            return left + (right - left) / 2; // Default to middle if invalid strategy
+    }
+}
 
-int* QuickSortInt::sort(int* array, int arraySize, int pivotIndex) {
+// Function to partition the array around the pivot
+int QuickSortInt::partition(int *array, int left, int right, int strategy) {
+    int pivotIndex = choosePivotIndex(left, right, strategy);
+    int pivotValue = array[pivotIndex];
+    std::swap(array[pivotIndex], array[right]); // Move pivot to end
+    int storeIndex = left;
+    for (int i = left; i < right; i++) {
+        if (array[i] < pivotValue) {
+            std::swap(array[i], array[storeIndex]);
+            storeIndex++;
+        }
+    }
+    std::swap(array[storeIndex], array[right]); // Move pivot to its final place
+    return storeIndex;
+}
+
+// Recursive quicksort function
+void QuickSortInt::quickSort(int *array, int left, int right, int strategy) {
+    if (left < right) {
+        int pivotIndex = partition(array, left, right, strategy);
+        quickSort(array, left, pivotIndex - 1, strategy); // Sort left subarray
+        quickSort(array, pivotIndex + 1, right, strategy); // Sort right subarray
+    }
+}
+
+// Public sort function that can specify pivot strategy
+int* QuickSortInt::sort(int* array, int arraySize, int strategy) {
     int* arraySorted = new int[arraySize];
     for (int i = 0; i < arraySize; i++) {
         arraySorted[i] = array[i];
     }
 
-    this->startTime = std::chrono::steady_clock::now();
-    if (pivotIndex < 0 || pivotIndex >= arraySize) pivotIndex = 0; // Zapewnienie, że indeks pivota jest w zakresie
-    quickSort(arraySorted, 0, arraySize - 1);
-    this->endTime = std::chrono::steady_clock::now();
-    this->duration = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime);
+    startTime = std::chrono::steady_clock::now();
+    quickSort(arraySorted, 0, arraySize - 1, strategy); // Start quicksort with the chosen strategy
+    endTime = std::chrono::steady_clock::now();
+    duration = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime);
 
     return arraySorted;
-}
-
-void QuickSortInt::quickSort(int *array, int left, int right) {
-    if (left < right) {
-        int pivotIndex = left + (right - left) / 2; // Można tu zmodyfikować wybór pivota
-        pivotIndex = partition(array, left, right, pivotIndex);
-        quickSort(array, left, pivotIndex - 1);
-        quickSort(array, pivotIndex + 1, right);
-    }
-}
-
-int QuickSortInt::partition(int *array, int left, int right, int pivotIndex) {
-    int pivotValue = array[pivotIndex];
-    swap(array[pivotIndex], array[right]); // Przesunięcie pivota na koniec
-    int storeIndex = left;
-    for (int i = left; i < right; i++) {
-        if (array[i] < pivotValue) {
-            swap(array[i], array[storeIndex]);
-            storeIndex++;
-        }
-    }
-    swap(array[storeIndex], array[right]); // Przesunięcie pivota na jego docelową pozycję
-    return storeIndex;
 }
 
