@@ -603,7 +603,7 @@ void intAnalysis(){
             QuickSortInt* quickSortInt = new QuickSortInt();
 
             double durationSum = 0;
-            const double durationCounter = 5.0;
+            const double durationCounter = 50.0;
             double durationToAnalyse;
 
 
@@ -743,7 +743,7 @@ void intAnalysis(){
             QuickSortInt* quickSortInt = new QuickSortInt();
 
             double durationSum = 0;
-            const double durationCounter = 5.0;
+            const double durationCounter = 50.0;
             double durationToAnalyse;
 
 
@@ -883,7 +883,7 @@ void intAnalysis(){
             QuickSortInt* quickSortInt = new QuickSortInt();
 
             double durationSum = 0;
-            const double durationCounter = 5.0;
+            const double durationCounter = 50.0;
             double durationToAnalyse;
 
 
@@ -1023,7 +1023,7 @@ void intAnalysis(){
             QuickSortInt* quickSortInt = new QuickSortInt();
 
             double durationSum = 0;
-            const double durationCounter = 5.0;
+            const double durationCounter = 50.0;
             double durationToAnalyse;
 
 

@@ -129,23 +129,17 @@ void intMenu2(int choice){ //menu 2 poziomu dla typu integer
                 string fileName;
                 cin >> fileName;
                 ifstream file(fileName);
-                int* tempArray = nullptr;
                 int tempArraySize = 0;
-                int value;
-                int numberOfValues = 0;
+
 
                 if(file.is_open()){
-                    file >> numberOfValues; //w pierwszym wierszu podana jest liczba danych do wczytania
-                    for(int i = 0; i < numberOfValues; i++){
-                        int* tempArray2 = new int[tempArraySize + 1]; //po kazdej odczytanej wartosci z pliku tworzymy nowa tablice
-                        for (int j = 0; j < tempArraySize; j++) //o 1 wieksza i dopisujemy nowa wartosc
-                            tempArray2[j] = tempArray[j];
+                    file >> tempArraySize; //w pierwszym wierszu podana jest liczba danych do wczytania
+                    int* tempArray = new int[tempArraySize];
 
-                        tempArray2[tempArraySize] = value;
-                        delete[] tempArray;
-                        tempArray = tempArray2;
-                        tempArraySize++;
+                    for(int i = 0; i < tempArraySize; i++){ //czytamy |tempArraySize| danych z pliku
+                        file >> tempArray[i];
                     }
+
                     delete[]array;
                     array = tempArray;
                     arraySize = tempArraySize;
@@ -415,23 +409,17 @@ void floatMenu2(int choice){ //menu 2. poziomu dla typu float
                 string fileName;
                 cin >> fileName;
                 ifstream file(fileName);
-                float* tempArray = nullptr;
                 int tempArraySize = 0;
-                float value;
-                int numberOfValues = 0;
+
 
                 if(file.is_open()){
-                    file >> numberOfValues;
-                    for(int i = 0; i < numberOfValues; i++){
-                        float* tempArray2 = new float [tempArraySize + 1]; //po kazdej odczytanej wartosci z pliku tworzymy nowa tablice
-                        for (int j = 0; j < tempArraySize; j++) //o 1 wieksza i dopisujemy nowa wartosc
-                            tempArray2[j] = tempArray[j];
+                    file >> tempArraySize; //w pierwszym wierszu podana jest liczba danych do wczytania
+                    float* tempArray = new float[tempArraySize];
 
-                        tempArray2[tempArraySize] = value;
-                        delete[] tempArray;
-                        tempArray = tempArray2;
-                        tempArraySize++;
+                    for(int i = 0; i < tempArraySize; i++){ //czytamy |tempArraySize| danych z pliku
+                        file >> tempArray[i];
                     }
+
                     delete[]array;
                     array = tempArray;
                     arraySize = tempArraySize;
@@ -684,23 +672,17 @@ void doubleMenu2(int choice){ //menu 2. poziomu dla typu double
                 string fileName;
                 cin >> fileName;
                 ifstream file(fileName);
-                double* tempArray = nullptr;
                 int tempArraySize = 0;
-                double value;
-                int numberOfValues = 0;
+
 
                 if(file.is_open()){
-                    file >> numberOfValues;
-                    for(int i = 0; i < numberOfValues; i++){
-                        double* tempArray2 = new double [tempArraySize + 1]; //po kazdej odczytanej wartosci z pliku tworzymy nowa tablice
-                        for (int j = 0; j< tempArraySize; j++) //o 1 wieksza i dopisujemy nowa wartosc
-                            tempArray2[j] = tempArray[j];
+                    file >> tempArraySize; //w pierwszym wierszu podana jest liczba danych do wczytania
+                    double* tempArray = new double[tempArraySize];
 
-                        tempArray2[tempArraySize] = value;
-                        delete[] tempArray;
-                        tempArray = tempArray2;
-                        tempArraySize++;
+                    for(int i = 0; i < tempArraySize; i++){ //czytamy |tempArraySize| danych z pliku
+                        file >> tempArray[i];
                     }
+
                     delete[]array;
                     array = tempArray;
                     arraySize = tempArraySize;
