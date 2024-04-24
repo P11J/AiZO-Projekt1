@@ -8,18 +8,18 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="C:/Users/HP/CLionProjects/AiZO-Projekt1/cmake-build-debug"/>
+				<Option working_dir="C:/1_Studia/AiZO/Projekt1/Projekt1/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/HP/CLionProjects/AiZO-Projekt1/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/HP/CLionProjects/AiZO-Projekt1/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/HP/CLionProjects/AiZO-Projekt1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/HP/CLionProjects/AiZO-Projekt1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/bin/mingw32-make.exe -f &quot;C:/1_Studia/AiZO/Projekt1/Projekt1/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/bin/mingw32-make.exe -f &quot;C:/1_Studia/AiZO/Projekt1/Projekt1/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/bin/mingw32-make.exe -f &quot;C:/1_Studia/AiZO/Projekt1/Projekt1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/bin/mingw32-make.exe -f &quot;C:/1_Studia/AiZO/Projekt1/Projekt1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="Projekt1">
-				<Option output="C:/Users/HP/CLionProjects/AiZO-Projekt1/cmake-build-debug/Projekt1.exe" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="C:/Users/HP/CLionProjects/AiZO-Projekt1/cmake-build-debug"/>
+				<Option output="C:/1_Studia/AiZO/Projekt1/Projekt1/cmake-build-debug/Projekt1.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/1_Studia/AiZO/Projekt1/Projekt1/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -33,15 +33,15 @@
 					<Add directory="C:/Program Files/JetBrains/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/HP/CLionProjects/AiZO-Projekt1/cmake-build-debug/Makefile&quot;  VERBOSE=1 Projekt1"/>
-					<CompileFile command="C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/HP/CLionProjects/AiZO-Projekt1/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/HP/CLionProjects/AiZO-Projekt1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/HP/CLionProjects/AiZO-Projekt1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/bin/mingw32-make.exe -f &quot;C:/1_Studia/AiZO/Projekt1/Projekt1/cmake-build-debug/Makefile&quot;  VERBOSE=1 Projekt1"/>
+					<CompileFile command="C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/bin/mingw32-make.exe -f &quot;C:/1_Studia/AiZO/Projekt1/Projekt1/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/bin/mingw32-make.exe -f &quot;C:/1_Studia/AiZO/Projekt1/Projekt1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/bin/mingw32-make.exe -f &quot;C:/1_Studia/AiZO/Projekt1/Projekt1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="Projekt1/fast">
-				<Option output="C:/Users/HP/CLionProjects/AiZO-Projekt1/cmake-build-debug/Projekt1.exe" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="C:/Users/HP/CLionProjects/AiZO-Projekt1/cmake-build-debug"/>
+				<Option output="C:/1_Studia/AiZO/Projekt1/Projekt1/cmake-build-debug/Projekt1.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/1_Studia/AiZO/Projekt1/Projekt1/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -55,73 +55,79 @@
 					<Add directory="C:/Program Files/JetBrains/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/HP/CLionProjects/AiZO-Projekt1/cmake-build-debug/Makefile&quot;  VERBOSE=1 Projekt1/fast"/>
-					<CompileFile command="C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/HP/CLionProjects/AiZO-Projekt1/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/HP/CLionProjects/AiZO-Projekt1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/HP/CLionProjects/AiZO-Projekt1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/bin/mingw32-make.exe -f &quot;C:/1_Studia/AiZO/Projekt1/Projekt1/cmake-build-debug/Makefile&quot;  VERBOSE=1 Projekt1/fast"/>
+					<CompileFile command="C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/bin/mingw32-make.exe -f &quot;C:/1_Studia/AiZO/Projekt1/Projekt1/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/bin/mingw32-make.exe -f &quot;C:/1_Studia/AiZO/Projekt1/Projekt1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/bin/mingw32-make.exe -f &quot;C:/1_Studia/AiZO/Projekt1/Projekt1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="C:/Users/HP/CLionProjects/AiZO-Projekt1/cmake-build-debug"/>
+				<Option working_dir="C:/1_Studia/AiZO/Projekt1/Projekt1/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/HP/CLionProjects/AiZO-Projekt1/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/HP/CLionProjects/AiZO-Projekt1/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/HP/CLionProjects/AiZO-Projekt1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/HP/CLionProjects/AiZO-Projekt1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/bin/mingw32-make.exe -f &quot;C:/1_Studia/AiZO/Projekt1/Projekt1/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/bin/mingw32-make.exe -f &quot;C:/1_Studia/AiZO/Projekt1/Projekt1/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/bin/mingw32-make.exe -f &quot;C:/1_Studia/AiZO/Projekt1/Projekt1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/bin/mingw32-make.exe -f &quot;C:/1_Studia/AiZO/Projekt1/Projekt1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="C:/Users/HP/CLionProjects/AiZO-Projekt1/cmake-build-debug"/>
+				<Option working_dir="C:/1_Studia/AiZO/Projekt1/Projekt1/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/HP/CLionProjects/AiZO-Projekt1/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/HP/CLionProjects/AiZO-Projekt1/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/HP/CLionProjects/AiZO-Projekt1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/HP/CLionProjects/AiZO-Projekt1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/bin/mingw32-make.exe -f &quot;C:/1_Studia/AiZO/Projekt1/Projekt1/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/bin/mingw32-make.exe -f &quot;C:/1_Studia/AiZO/Projekt1/Projekt1/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/bin/mingw32-make.exe -f &quot;C:/1_Studia/AiZO/Projekt1/Projekt1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/bin/mingw32-make.exe -f &quot;C:/1_Studia/AiZO/Projekt1/Projekt1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="C:/Users/HP/CLionProjects/AiZO-Projekt1/DoubleAnalysis.cpp">
+		<Unit filename="C:/1_Studia/AiZO/Projekt1/Projekt1/DoubleAnalysis.cpp">
 			<Option target="Projekt1"/>
 		</Unit>
-		<Unit filename="C:/Users/HP/CLionProjects/AiZO-Projekt1/DoubleAnalysis.h">
+		<Unit filename="C:/1_Studia/AiZO/Projekt1/Projekt1/DoubleAnalysis.h">
 			<Option target="Projekt1"/>
 		</Unit>
-		<Unit filename="C:/Users/HP/CLionProjects/AiZO-Projekt1/IntAnalysis.cpp">
+		<Unit filename="C:/1_Studia/AiZO/Projekt1/Projekt1/FloatAnalysis.cpp">
 			<Option target="Projekt1"/>
 		</Unit>
-		<Unit filename="C:/Users/HP/CLionProjects/AiZO-Projekt1/IntAnalysis.h">
+		<Unit filename="C:/1_Studia/AiZO/Projekt1/Projekt1/FloatAnalysis.h">
 			<Option target="Projekt1"/>
 		</Unit>
-		<Unit filename="C:/Users/HP/CLionProjects/AiZO-Projekt1/MenuFunctions.cpp">
+		<Unit filename="C:/1_Studia/AiZO/Projekt1/Projekt1/IntAnalysis.cpp">
 			<Option target="Projekt1"/>
 		</Unit>
-		<Unit filename="C:/Users/HP/CLionProjects/AiZO-Projekt1/MenuFunctions.h">
+		<Unit filename="C:/1_Studia/AiZO/Projekt1/Projekt1/IntAnalysis.h">
 			<Option target="Projekt1"/>
 		</Unit>
-		<Unit filename="C:/Users/HP/CLionProjects/AiZO-Projekt1/SortAlgDouble.cpp">
+		<Unit filename="C:/1_Studia/AiZO/Projekt1/Projekt1/MenuFunctions.cpp">
 			<Option target="Projekt1"/>
 		</Unit>
-		<Unit filename="C:/Users/HP/CLionProjects/AiZO-Projekt1/SortAlgDouble.h">
+		<Unit filename="C:/1_Studia/AiZO/Projekt1/Projekt1/MenuFunctions.h">
 			<Option target="Projekt1"/>
 		</Unit>
-		<Unit filename="C:/Users/HP/CLionProjects/AiZO-Projekt1/SortAlgFloat.cpp">
+		<Unit filename="C:/1_Studia/AiZO/Projekt1/Projekt1/SortAlgDouble.cpp">
 			<Option target="Projekt1"/>
 		</Unit>
-		<Unit filename="C:/Users/HP/CLionProjects/AiZO-Projekt1/SortAlgFloat.h">
+		<Unit filename="C:/1_Studia/AiZO/Projekt1/Projekt1/SortAlgDouble.h">
 			<Option target="Projekt1"/>
 		</Unit>
-		<Unit filename="C:/Users/HP/CLionProjects/AiZO-Projekt1/SortAlgInt.cpp">
+		<Unit filename="C:/1_Studia/AiZO/Projekt1/Projekt1/SortAlgFloat.cpp">
 			<Option target="Projekt1"/>
 		</Unit>
-		<Unit filename="C:/Users/HP/CLionProjects/AiZO-Projekt1/SortAlgInt.h">
+		<Unit filename="C:/1_Studia/AiZO/Projekt1/Projekt1/SortAlgFloat.h">
 			<Option target="Projekt1"/>
 		</Unit>
-		<Unit filename="C:/Users/HP/CLionProjects/AiZO-Projekt1/main.cpp">
+		<Unit filename="C:/1_Studia/AiZO/Projekt1/Projekt1/SortAlgInt.cpp">
 			<Option target="Projekt1"/>
 		</Unit>
-		<Unit filename="C:/Users/HP/CLionProjects/AiZO-Projekt1/CMakeLists.txt">
+		<Unit filename="C:/1_Studia/AiZO/Projekt1/Projekt1/SortAlgInt.h">
+			<Option target="Projekt1"/>
+		</Unit>
+		<Unit filename="C:/1_Studia/AiZO/Projekt1/Projekt1/main.cpp">
+			<Option target="Projekt1"/>
+		</Unit>
+		<Unit filename="C:/1_Studia/AiZO/Projekt1/Projekt1/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>

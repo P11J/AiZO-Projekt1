@@ -18,4 +18,6 @@ add_executable(Projekt1 main.cpp
         SortAlgDouble.h
         SortAlgFloat.cpp
         SortAlgFloat.h
+        FloatAnalysis.cpp
+        FloatAnalysis.h
 )

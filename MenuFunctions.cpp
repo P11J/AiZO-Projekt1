@@ -4,6 +4,7 @@
 #include "SortAlgFloat.h"
 #include "IntAnalysis.h"
 #include "DoubleAnalysis.h"
+#include "FloatAnalysis.h"
 
 #include <iostream>
 #include <fstream>
@@ -539,8 +540,7 @@ void floatMenu2(int choice){ //menu 2. poziomu dla typu float
                 break;
             }
             case 11:{
-                cout << "Dla danych typu float nie ma opcji przeprowadzenia analizy (zgodnie z zalozeniami projektowymi)\n";
-
+                floatAnalysis();
                 break;
             }
             case 12: {

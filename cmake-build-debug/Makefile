@@ -56,10 +56,10 @@ RM = "C:\Program Files\JetBrains\CLion 2023.3.4\bin\cmake\win\x64\bin\cmake.exe"
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\HP\CLionProjects\AiZO-Projekt1
+CMAKE_SOURCE_DIR = C:\1_Studia\AiZO\Projekt1\Projekt1
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\HP\CLionProjects\AiZO-Projekt1\cmake-build-debug
+CMAKE_BINARY_DIR = C:\1_Studia\AiZO\Projekt1\Projekt1\cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -86,9 +86,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\HP\CLionProjects\AiZO-Projekt1\cmake-build-debug\CMakeFiles C:\Users\HP\CLionProjects\AiZO-Projekt1\cmake-build-debug\\CMakeFiles\progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\1_Studia\AiZO\Projekt1\Projekt1\cmake-build-debug\CMakeFiles C:\1_Studia\AiZO\Projekt1\Projekt1\cmake-build-debug\\CMakeFiles\progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\HP\CLionProjects\AiZO-Projekt1\cmake-build-debug\CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\1_Studia\AiZO\Projekt1\Projekt1\cmake-build-debug\CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -151,6 +151,30 @@ DoubleAnalysis.s: DoubleAnalysis.cpp.s
 DoubleAnalysis.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Projekt1.dir\build.make CMakeFiles/Projekt1.dir/DoubleAnalysis.cpp.s
 .PHONY : DoubleAnalysis.cpp.s
+
+FloatAnalysis.obj: FloatAnalysis.cpp.obj
+.PHONY : FloatAnalysis.obj
+
+# target to build an object file
+FloatAnalysis.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Projekt1.dir\build.make CMakeFiles/Projekt1.dir/FloatAnalysis.cpp.obj
+.PHONY : FloatAnalysis.cpp.obj
+
+FloatAnalysis.i: FloatAnalysis.cpp.i
+.PHONY : FloatAnalysis.i
+
+# target to preprocess a source file
+FloatAnalysis.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Projekt1.dir\build.make CMakeFiles/Projekt1.dir/FloatAnalysis.cpp.i
+.PHONY : FloatAnalysis.cpp.i
+
+FloatAnalysis.s: FloatAnalysis.cpp.s
+.PHONY : FloatAnalysis.s
+
+# target to generate assembly for a file
+FloatAnalysis.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Projekt1.dir\build.make CMakeFiles/Projekt1.dir/FloatAnalysis.cpp.s
+.PHONY : FloatAnalysis.cpp.s
 
 IntAnalysis.obj: IntAnalysis.cpp.obj
 .PHONY : IntAnalysis.obj
@@ -308,6 +332,9 @@ help:
 	@echo ... DoubleAnalysis.obj
 	@echo ... DoubleAnalysis.i
 	@echo ... DoubleAnalysis.s
+	@echo ... FloatAnalysis.obj
+	@echo ... FloatAnalysis.i
+	@echo ... FloatAnalysis.s
 	@echo ... IntAnalysis.obj
 	@echo ... IntAnalysis.i
 	@echo ... IntAnalysis.s
