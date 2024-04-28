@@ -45,15 +45,16 @@ int* InsertionSortInt::sortArray(int *array, int arraySize) {
 
     this->startTime = chrono::steady_clock::now();
     int key;
-    for (int i = 1; i < arraySize; i++) {
-        key = arrayToSort[i];
-        int j = i;
-        while (j > 0 and arrayToSort[j - 1] > key) {
-            arrayToSort[j] = arrayToSort[j - 1];
-            j--;
+    for (int i = 1; i < arraySize; i++) { // Rozpocznij pętlę od drugiego elementu tablicy
+        key = arrayToSort[i]; // Przypisz aktualny element do zmiennej pomocniczej 'key'
+        int j = i; // Zainicjuj zmienną pomocniczą 'j', która będzie wskazywać na obecnie analizowaną pozycję
+        while (j > 0 and arrayToSort[j - 1] > key) { // Dopóki nie jesteśmy na początku tablicy i poprzedni element jest większy niż 'key'
+            arrayToSort[j] = arrayToSort[j - 1]; // Przesuń element większy niż 'key' o jedną pozycję w prawo
+            j--; // Dekrementuj 'j', by sprawdzić kolejne elementy w lewo
         }
-        arrayToSort[j] = key;
+        arrayToSort[j] = key; // Umieść element 'key' na odpowiedniej pozycji w posortowanej części tablicy
     }
+
     this->endTime = chrono::steady_clock::now();
     this->duration = chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime);
     return arrayToSort;
@@ -80,9 +81,10 @@ void HeapSortInt::heap_fix_down(int *array, int i, int arraySize) {
 }
 
 void HeapSortInt::heap_create_dn(int *array, int arraySize) {
-    for (int i = (arraySize - 2) / 2; i >= 0; --i) // Rozpocznij od ostatniego węzła, który ma potomków
-        heap_fix_down(array, i, arraySize);
+    for (int i = (arraySize - 2) / 2; i >= 0; --i) // Rozpocznij od ostatniego węzła, który ma potomków i przesuwaj się wstecz
+        heap_fix_down(array, i, arraySize); // Napraw kopiec, zaczynając od i-tego węzła, by utrzymać własność kopca
 }
+
 
 int* HeapSortInt::sortArray(int *array, int arraySize) {
     int *arrayToSort = new int[arraySize];
@@ -90,11 +92,12 @@ int* HeapSortInt::sortArray(int *array, int arraySize) {
         arrayToSort[i] = array[i];
     }
     this->startTime = chrono::steady_clock::now();
-    heap_create_dn(arrayToSort, arraySize);
-    for (int i = arraySize - 1; i > 0; i--) {
-        swap(arrayToSort[0], arrayToSort[i]); //zamiana
-        heap_fix_down(arrayToSort, 0, i); //naprawa
+    heap_create_dn(arrayToSort, arraySize); // Buduje kopiec z nieposortowanej tablicy
+    for (int i = arraySize - 1; i > 0; i--) { // Przetwarzaj elementy od końca tablicy do drugiego elementu
+        swap(arrayToSort[0], arrayToSort[i]); // Zamień korzeń kopca (największy element) z ostatnim elementem nieposortowanego segmentu
+        heap_fix_down(arrayToSort, 0, i); // Przywróć własność kopca, ignorując elementy posortowane
     }
+
     this->endTime = chrono::steady_clock::now();
     this->duration = chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime);
     return arrayToSort;
@@ -108,16 +111,18 @@ int* ShellSortInt::sortShell(int *array, int arraySize) {
     }
 
     this->startTime = chrono::steady_clock::now();
-    for (int gap = arraySize / 2; gap > 0; gap /= 2) {
-        for (int i = gap; i < arraySize; i += 1) {
-            int temp = arrayToSort[i];
+    for (int gap = arraySize / 2; gap > 0; gap /= 2) { // Ustala początkowy odstęp między elementami do porównania i zmniejsza go z każdą iteracją
+        for (int i = gap; i < arraySize; i++) { // Przechodzi przez tablicę od elementu o indeksie równym obecnemu odstępowi do końca tablicy
+            int temp = arrayToSort[i]; // Zapisuje obecnie analizowany element, który będzie wstawiony na właściwe miejsce
             int j;
-            for (j = i; j >= gap and arrayToSort[j - gap] > temp; j -= gap) {
-                arrayToSort[j] = arrayToSort[j - gap];
+            for (j = i; j >= gap and arrayToSort[j - gap] > temp; j -= gap) { // Porusza się wstecz w tablicy co 'gap' elementów i przesuwa elementy większe od temp
+                arrayToSort[j] = arrayToSort[j - gap]; // Przesuwa element znajdujący się 'gap' miejsc przed 'j' na pozycję 'j'
             }
-            arrayToSort[j] = temp;
+            arrayToSort[j] = temp; // Umieszcza zapisany element w odpowiedniej pozycji wewnątrz posortowanego segmentu
         }
     }
+
+
     this->endTime = chrono::steady_clock::now();
     this->duration = chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime);
 
@@ -177,24 +182,25 @@ int QuickSortInt::choosePivotIndex(int left, int right, int strategy) {
 
 //
 int QuickSortInt::partition(int *array, int left, int right, int strategy) {
-    int pivotIndex = choosePivotIndex(left, right, strategy);
-    int pivotValue = array[pivotIndex];
-    swap(array[pivotIndex], array[right]); // zamiana pivota na koniec
-    int storeIndex = left;
-    for (int i = left; i < right; i++) {
-        if (array[i] < pivotValue) {
+    int pivotIndex = choosePivotIndex(left, right, strategy); // Wybiera indeks pivota na podstawie strategii
+    int pivotValue = array[pivotIndex]; // Pobiera wartość pivota
+    swap(array[pivotIndex], array[right]); // Przenosi pivota na koniec przedziału, aby ułatwić manipulacje
+    int storeIndex = left; // Ustawia początkowy indeks dla elementów mniejszych od pivota
+    for (int i = left; i < right; i++) { // Iteruje przez wszystkie elementy z wyjątkiem pivota
+        if (array[i] < pivotValue) { // Jeśli element jest mniejszy od pivota, zamienia go z elementem na storeIndex
             swap(array[i], array[storeIndex]);
-            storeIndex++;
+            storeIndex++; // Przesuwa storeIndex na kolejną pozycję
         }
     }
-    swap(array[storeIndex], array[right]); // zamiana pivota na jego miejsce
-    return storeIndex;
+    swap(array[storeIndex], array[right]); // Umieszcza pivota w środkowej pozycji między elementami mniejszymi i większymi od niego
+    return storeIndex; // Zwraca indeks, na którym znajduje się pivot, dzieląc tablicę na dwie części
 }
+
 
 // quicksort rekurencyjnie
 void QuickSortInt::quickSort(int *array, int left, int right, int strategy) {
     if (left < right) {
-        int pivotIndex = partition(array, left, right, strategy);
+        int pivotIndex = partition(array, left, right, strategy); // dzieli tablice na dwie podtablice wzgledem pivota
         quickSort(array, left, pivotIndex - 1, strategy); // sortowanie lewej czesci
         quickSort(array, pivotIndex + 1, right, strategy); // sortowanie prawej czesci
     }
