@@ -184,7 +184,7 @@ int QuickSortInt::choosePivotIndex(int left, int right, int strategy) {
 int QuickSortInt::partition(int *array, int left, int right, int strategy) {
     int pivotIndex = choosePivotIndex(left, right, strategy); // Wybiera indeks pivota na podstawie strategii
     int pivotValue = array[pivotIndex]; // Pobiera wartość pivota
-    swap(array[pivotIndex], array[right]); // Przenosi pivota na koniec przedziału, aby ułatwić manipulacje
+    swap(array[pivotIndex], array[right]); // Przenosi pivota na koniec przedziału
     int storeIndex = left; // Ustawia początkowy indeks dla elementów mniejszych od pivota
     for (int i = left; i < right; i++) { // Iteruje przez wszystkie elementy z wyjątkiem pivota
         if (array[i] < pivotValue) { // Jeśli element jest mniejszy od pivota, zamienia go z elementem na storeIndex
