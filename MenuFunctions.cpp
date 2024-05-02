@@ -1,10 +1,10 @@
 #include "MenuFunctions.h"
-#include "SortAlgInt.h"
-#include "SortAlgDouble.h"
-#include "SortAlgFloat.h"
-#include "IntAnalysis.h"
-#include "DoubleAnalysis.h"
-#include "FloatAnalysis.h"
+#include "SortAlgType/SortAlgInt.h"
+#include "SortAlgType/SortAlgDouble.h"
+#include "SortAlgType/SortAlgFloat.h"
+#include "typeAnalysis/IntAnalysis.h"
+#include "typeAnalysis/DoubleAnalysis.h"
+#include "typeAnalysis/FloatAnalysis.h"
 
 #include <iostream>
 #include <fstream>

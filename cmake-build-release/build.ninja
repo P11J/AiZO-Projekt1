@@ -55,11 +55,11 @@ build CMakeFiles/Projekt1.dir/main.cpp.obj: CXX_COMPILER__Projekt1_unscanned_Rel
   OBJECT_DIR = CMakeFiles\Projekt1.dir
   OBJECT_FILE_DIR = CMakeFiles\Projekt1.dir
 
-build CMakeFiles/Projekt1.dir/SortAlgInt.cpp.obj: CXX_COMPILER__Projekt1_unscanned_Release E$:/1_studia/AiZO/Projekt1/SortAlgInt.cpp || cmake_object_order_depends_target_Projekt1
-  DEP_FILE = CMakeFiles\Projekt1.dir\SortAlgInt.cpp.obj.d
+build CMakeFiles/Projekt1.dir/SortAlgType/SortAlgInt.cpp.obj: CXX_COMPILER__Projekt1_unscanned_Release E$:/1_studia/AiZO/Projekt1/SortAlgType/SortAlgInt.cpp || cmake_object_order_depends_target_Projekt1
+  DEP_FILE = CMakeFiles\Projekt1.dir\SortAlgType\SortAlgInt.cpp.obj.d
   FLAGS = -O3 -DNDEBUG -std=gnu++20 -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\Projekt1.dir
-  OBJECT_FILE_DIR = CMakeFiles\Projekt1.dir
+  OBJECT_FILE_DIR = CMakeFiles\Projekt1.dir\SortAlgType
 
 build CMakeFiles/Projekt1.dir/MenuFunctions.cpp.obj: CXX_COMPILER__Projekt1_unscanned_Release E$:/1_studia/AiZO/Projekt1/MenuFunctions.cpp || cmake_object_order_depends_target_Projekt1
   DEP_FILE = CMakeFiles\Projekt1.dir\MenuFunctions.cpp.obj.d
@@ -67,29 +67,35 @@ build CMakeFiles/Projekt1.dir/MenuFunctions.cpp.obj: CXX_COMPILER__Projekt1_unsc
   OBJECT_DIR = CMakeFiles\Projekt1.dir
   OBJECT_FILE_DIR = CMakeFiles\Projekt1.dir
 
-build CMakeFiles/Projekt1.dir/IntAnalysis.cpp.obj: CXX_COMPILER__Projekt1_unscanned_Release E$:/1_studia/AiZO/Projekt1/IntAnalysis.cpp || cmake_object_order_depends_target_Projekt1
-  DEP_FILE = CMakeFiles\Projekt1.dir\IntAnalysis.cpp.obj.d
+build CMakeFiles/Projekt1.dir/TypeAnalysis/IntAnalysis.cpp.obj: CXX_COMPILER__Projekt1_unscanned_Release E$:/1_studia/AiZO/Projekt1/TypeAnalysis/IntAnalysis.cpp || cmake_object_order_depends_target_Projekt1
+  DEP_FILE = CMakeFiles\Projekt1.dir\TypeAnalysis\IntAnalysis.cpp.obj.d
   FLAGS = -O3 -DNDEBUG -std=gnu++20 -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\Projekt1.dir
-  OBJECT_FILE_DIR = CMakeFiles\Projekt1.dir
+  OBJECT_FILE_DIR = CMakeFiles\Projekt1.dir\TypeAnalysis
 
-build CMakeFiles/Projekt1.dir/DoubleAnalysis.cpp.obj: CXX_COMPILER__Projekt1_unscanned_Release E$:/1_studia/AiZO/Projekt1/DoubleAnalysis.cpp || cmake_object_order_depends_target_Projekt1
-  DEP_FILE = CMakeFiles\Projekt1.dir\DoubleAnalysis.cpp.obj.d
+build CMakeFiles/Projekt1.dir/TypeAnalysis/DoubleAnalysis.cpp.obj: CXX_COMPILER__Projekt1_unscanned_Release E$:/1_studia/AiZO/Projekt1/TypeAnalysis/DoubleAnalysis.cpp || cmake_object_order_depends_target_Projekt1
+  DEP_FILE = CMakeFiles\Projekt1.dir\TypeAnalysis\DoubleAnalysis.cpp.obj.d
   FLAGS = -O3 -DNDEBUG -std=gnu++20 -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\Projekt1.dir
-  OBJECT_FILE_DIR = CMakeFiles\Projekt1.dir
+  OBJECT_FILE_DIR = CMakeFiles\Projekt1.dir\TypeAnalysis
 
-build CMakeFiles/Projekt1.dir/SortAlgDouble.cpp.obj: CXX_COMPILER__Projekt1_unscanned_Release E$:/1_studia/AiZO/Projekt1/SortAlgDouble.cpp || cmake_object_order_depends_target_Projekt1
-  DEP_FILE = CMakeFiles\Projekt1.dir\SortAlgDouble.cpp.obj.d
+build CMakeFiles/Projekt1.dir/SortAlgType/SortAlgDouble.cpp.obj: CXX_COMPILER__Projekt1_unscanned_Release E$:/1_studia/AiZO/Projekt1/SortAlgType/SortAlgDouble.cpp || cmake_object_order_depends_target_Projekt1
+  DEP_FILE = CMakeFiles\Projekt1.dir\SortAlgType\SortAlgDouble.cpp.obj.d
   FLAGS = -O3 -DNDEBUG -std=gnu++20 -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\Projekt1.dir
-  OBJECT_FILE_DIR = CMakeFiles\Projekt1.dir
+  OBJECT_FILE_DIR = CMakeFiles\Projekt1.dir\SortAlgType
 
-build CMakeFiles/Projekt1.dir/SortAlgFloat.cpp.obj: CXX_COMPILER__Projekt1_unscanned_Release E$:/1_studia/AiZO/Projekt1/SortAlgFloat.cpp || cmake_object_order_depends_target_Projekt1
-  DEP_FILE = CMakeFiles\Projekt1.dir\SortAlgFloat.cpp.obj.d
+build CMakeFiles/Projekt1.dir/SortAlgType/SortAlgFloat.cpp.obj: CXX_COMPILER__Projekt1_unscanned_Release E$:/1_studia/AiZO/Projekt1/SortAlgType/SortAlgFloat.cpp || cmake_object_order_depends_target_Projekt1
+  DEP_FILE = CMakeFiles\Projekt1.dir\SortAlgType\SortAlgFloat.cpp.obj.d
   FLAGS = -O3 -DNDEBUG -std=gnu++20 -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\Projekt1.dir
-  OBJECT_FILE_DIR = CMakeFiles\Projekt1.dir
+  OBJECT_FILE_DIR = CMakeFiles\Projekt1.dir\SortAlgType
+
+build CMakeFiles/Projekt1.dir/TypeAnalysis/FloatAnalysis.cpp.obj: CXX_COMPILER__Projekt1_unscanned_Release E$:/1_studia/AiZO/Projekt1/TypeAnalysis/FloatAnalysis.cpp || cmake_object_order_depends_target_Projekt1
+  DEP_FILE = CMakeFiles\Projekt1.dir\TypeAnalysis\FloatAnalysis.cpp.obj.d
+  FLAGS = -O3 -DNDEBUG -std=gnu++20 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\Projekt1.dir
+  OBJECT_FILE_DIR = CMakeFiles\Projekt1.dir\TypeAnalysis
 
 
 # =============================================================================
@@ -99,7 +105,7 @@ build CMakeFiles/Projekt1.dir/SortAlgFloat.cpp.obj: CXX_COMPILER__Projekt1_unsca
 #############################################
 # Link the executable Projekt1.exe
 
-build Projekt1.exe: CXX_EXECUTABLE_LINKER__Projekt1_Release CMakeFiles/Projekt1.dir/main.cpp.obj CMakeFiles/Projekt1.dir/SortAlgInt.cpp.obj CMakeFiles/Projekt1.dir/MenuFunctions.cpp.obj CMakeFiles/Projekt1.dir/IntAnalysis.cpp.obj CMakeFiles/Projekt1.dir/DoubleAnalysis.cpp.obj CMakeFiles/Projekt1.dir/SortAlgDouble.cpp.obj CMakeFiles/Projekt1.dir/SortAlgFloat.cpp.obj
+build Projekt1.exe: CXX_EXECUTABLE_LINKER__Projekt1_Release CMakeFiles/Projekt1.dir/main.cpp.obj CMakeFiles/Projekt1.dir/SortAlgType/SortAlgInt.cpp.obj CMakeFiles/Projekt1.dir/MenuFunctions.cpp.obj CMakeFiles/Projekt1.dir/TypeAnalysis/IntAnalysis.cpp.obj CMakeFiles/Projekt1.dir/TypeAnalysis/DoubleAnalysis.cpp.obj CMakeFiles/Projekt1.dir/SortAlgType/SortAlgDouble.cpp.obj CMakeFiles/Projekt1.dir/SortAlgType/SortAlgFloat.cpp.obj CMakeFiles/Projekt1.dir/TypeAnalysis/FloatAnalysis.cpp.obj
   FLAGS = -O3 -DNDEBUG
   LINK_FLAGS = -static
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
